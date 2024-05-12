@@ -42,6 +42,10 @@ struct StartView: View {
                     .navigationDestination(isPresented: $isShowingInputView, destination: {
                         InputView()
                     })
+                    .navigationDestination(isPresented: $isShowingRecordView, destination: {
+                        RecordView()
+                        
+                    })
                     .navigationBarItems(
                         leading: Button {
                             isShowingSettingView.toggle()

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 final class PrefectureMatchingController: ObservableObject {
     @Published var userName = ""
@@ -16,7 +17,7 @@ final class PrefectureMatchingController: ObservableObject {
     let calendar = Calendar(identifier: .gregorian)
     let now = Date()
     //占い結果を取得するAPIの処理
-    func readFortuneTelling() async {
+    func readFortuneTelling(viewContext: NSManagedObjectContext) async {
         guard let url = URL(string: "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud/my_fortune") else {
             print("error")
             return
@@ -39,7 +40,7 @@ final class PrefectureMatchingController: ObservableObject {
                 "day": Int(calendar.component(.day, from: now))
             ]
         ]
-        //受け取ったデータの入力(ユーザーネーム、誕生日、血液型等)
+        // 受け取ったデータの入力(ユーザーネーム、誕生日、血液型等)
         guard let httpBody = try? JSONSerialization.data(withJSONObject: users) else { return }
         request.httpBody = httpBody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -58,9 +59,10 @@ final class PrefectureMatchingController: ObservableObject {
             do {
                 let responseObject = try JSONDecoder().decode(ResultData.self, from: data)                
                 DispatchQueue.main.async {
-                    //結果データの出力
+                    // 結果データの出力
                     self.result = responseObject
                 }
+                self.addResultToCoreData(result: responseObject, viewContext: viewContext)
             } catch {
                 print(error)
                 if let responseString = String(data: data, encoding: .utf8) {
@@ -71,5 +73,14 @@ final class PrefectureMatchingController: ObservableObject {
             }
         }
         task.resume()
+    }
+    func addResultToCoreData(result: ResultData, viewContext: NSManagedObjectContext) {
+        let newItem = FortuneResult(context: viewContext)
+        newItem.userName = userName
+        newItem.birthday = birthDay
+        newItem.bloodType = bloodType
+        newItem.logoURL = result.logo_url.absoluteString
+        newItem.prefecture = result.name
+        newItem.createDate = Date()
     }
 }

@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct MatchMyPrefectureApp: App {
+    let persistenceController = PersistenceController()
     var body: some Scene {
         WindowGroup {
             StartView()
+                .environment(
+                    \.managedObjectContext,
+                     persistenceController.container.viewContext
+                )
         }
     }
 }

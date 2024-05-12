@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import CoreData
 
 struct InputView: View {
     @ObservedObject var dataController = PrefectureMatchingController()
@@ -15,7 +16,8 @@ struct InputView: View {
     @State private var isShowingBloodTypeSheet = false
     @State var isShowingResultView = false
     @FocusState var focus: Bool
-    //ユーザーネームが記述されたときに"占う"ボタンが使えるようにする
+    @Environment(\.managedObjectContext) var viewContext
+    // ユーザーネームが記述されたときに"占う"ボタンが使えるようにする
     var buttonEnable: Bool {
         if !dataController.userName.isEmpty {
             return true
@@ -49,7 +51,7 @@ struct InputView: View {
                         
                     })
                     .focused(self.$focus)
-                    //文字数を127文字以内に制限する
+                    // 文字数を127文字以内に制限する
                     .onReceive(Just(dataController.userName)) { _ in
                         if dataController.userName.count > 127 {
                             dataController.userName = String(dataController.userName.prefix(127))
@@ -114,11 +116,9 @@ struct InputView: View {
                     } else {
                         dataController.bloodTypeReplace = dataController.bloodType.first!.description.lowercased()
                     }
-                    
                     Task {
-                        await dataController.readFortuneTelling()
-                    }
-                    
+                        await dataController.readFortuneTelling(viewContext: viewContext)
+                    }                    
                     var transaction = Transaction()
                     transaction.disablesAnimations = true
                     withTransaction(transaction) {
@@ -151,7 +151,7 @@ struct InputView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
-    //Date型のデータをString型にする
+    // Date型のデータをString型にする
     func dateToString(dateString: Date) -> String? {
         let formatter: DateFormatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .gregorian)
