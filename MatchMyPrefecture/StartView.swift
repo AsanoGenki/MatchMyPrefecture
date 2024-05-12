@@ -39,6 +39,9 @@ struct StartView: View {
                         ButtonUIView(text: "はじめる", color: .green, backColor: .yellow)
                     }
                     .padding(.bottom)
+                    .navigationDestination(isPresented: $isShowingInputView, destination: {
+                        InputView()
+                    })
                     .navigationBarItems(
                         leading: Button {
                             isShowingSettingView.toggle()
