@@ -11,6 +11,10 @@ struct StartView: View {
     @State private var isShowingInputView = false
     @State private var isShowingRecordView = false
     @State private var isShowingSettingView = false
+    @Environment(\.scenePhase) private var scenePhase
+    @EnvironmentObject var bgmPlayerManager: BGMPlayerManager
+    @EnvironmentObject var sePlayerManager: SEPlayerManager
+    @AppStorage("BGM") var isPlayingBGM: Bool = true
     var body: some View {
         NavigationStack {
             ZStack {
@@ -34,6 +38,8 @@ struct StartView: View {
                         .frame(width: UIScreen.main.bounds.width * 0.8)
                         .padding(.top, 20)
                     Button {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        sePlayerManager.playClickNormal()
                         isShowingInputView.toggle()
                     } label: {
                         ButtonUIView(text: "はじめる", color: .green, backColor: .yellow)
@@ -46,8 +52,13 @@ struct StartView: View {
                         RecordView()
                         
                     })
+                    .sheet(isPresented: $isShowingSettingView) {
+                        SettingView()
+                            .presentationDetents([ .fraction(0.4)])
+                    }
                     .navigationBarItems(
                         leading: Button {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             isShowingSettingView.toggle()
                         } label: {
                             Image(systemName: "gearshape")
@@ -55,6 +66,7 @@ struct StartView: View {
                                 .foregroundColor(.white)
                         },
                         trailing: Button {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             isShowingRecordView.toggle()
                         } label: {
                             Image(systemName: "timer")
@@ -63,6 +75,19 @@ struct StartView: View {
                         }
                     )
                 }
+            }
+        }
+        .onChange(of: scenePhase) { phase in
+            switch phase {
+            case .active:
+                if isPlayingBGM {
+                    bgmPlayerManager.playBGM()
+                }
+            case .inactive:
+                bgmPlayerManager.stopBGM()
+            case .background:
+                bgmPlayerManager.stopBGM()                
+            @unknown default: break
             }
         }
     }

@@ -17,6 +17,7 @@ struct InputView: View {
     @State var isShowingResultView = false
     @FocusState var focus: Bool
     @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject var sePlayerManager: SEPlayerManager
     // ユーザーネームが記述されたときに"占う"ボタンが使えるようにする
     var buttonEnable: Bool {
         if !dataController.userName.isEmpty {
@@ -118,7 +119,9 @@ struct InputView: View {
                     }
                     Task {
                         await dataController.readFortuneTelling(viewContext: viewContext)
-                    }                    
+                    } 
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    sePlayerManager.playClickNormal()
                     var transaction = Transaction()
                     transaction.disablesAnimations = true
                     withTransaction(transaction) {

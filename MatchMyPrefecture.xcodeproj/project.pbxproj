@@ -10,6 +10,9 @@
 		4A1DB2382BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DB2362BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld */; };
 		4A1DB23A2BF0B4B800396724 /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DB2392BF0B4B800396724 /* Persistent.swift */; };
 		4A1DB23C2BF0B81400396724 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DB23B2BF0B81400396724 /* RecordView.swift */; };
+		4A742AF22BF100F000DB67BF /* BGMPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A742AF12BF100F000DB67BF /* BGMPlayerManager.swift */; };
+		4A742AF42BF1044B00DB67BF /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A742AF32BF1044B00DB67BF /* SettingView.swift */; };
+		4A742AF62BF1059F00DB67BF /* SEPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A742AF52BF1059F00DB67BF /* SEPlayerManager.swift */; };
 		4A98D96C2BF07DB800C46D94 /* MatchMyPrefectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */; };
 		4A98D96E2BF07DB800C46D94 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98D96D2BF07DB800C46D94 /* StartView.swift */; };
 		4A98D9702BF07DBA00C46D94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A98D96F2BF07DBA00C46D94 /* Assets.xcassets */; };
@@ -28,6 +31,10 @@
 		4A1DB2372BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatchMyPrefecture.xcdatamodel; sourceTree = "<group>"; };
 		4A1DB2392BF0B4B800396724 /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
 		4A1DB23B2BF0B81400396724 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		4A742AF12BF100F000DB67BF /* BGMPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGMPlayerManager.swift; sourceTree = "<group>"; };
+		4A742AF32BF1044B00DB67BF /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		4A742AF52BF1059F00DB67BF /* SEPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEPlayerManager.swift; sourceTree = "<group>"; };
+		4A742AF72BF1080700DB67BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A98D9682BF07DB800C46D94 /* MatchMyPrefecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchMyPrefecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMyPrefectureApp.swift; sourceTree = "<group>"; };
 		4A98D96D2BF07DB800C46D94 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
@@ -73,8 +80,9 @@
 		4A98D96A2BF07DB800C46D94 /* MatchMyPrefecture */ = {
 			isa = PBXGroup;
 			children = (
-				4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */,
+				4A742AF72BF1080700DB67BF /* Info.plist */,
 				4A1DB2362BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld */,
+				4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */,
 				4A1DB2392BF0B4B800396724 /* Persistent.swift */,
 				4AA6063F2BF0AB33004B2C31 /* Start */,
 				4AA606312BF09256004B2C31 /* Input */,
@@ -117,8 +125,10 @@
 		4AA6063E2BF0AB2C004B2C31 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */,
 				4AA606342BF099B4004B2C31 /* ResultData.swift */,
+				4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */,
+				4A742AF12BF100F000DB67BF /* BGMPlayerManager.swift */,
+				4A742AF52BF1059F00DB67BF /* SEPlayerManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -128,6 +138,7 @@
 			children = (
 				4A98D96D2BF07DB800C46D94 /* StartView.swift */,
 				4A1DB23B2BF0B81400396724 /* RecordView.swift */,
+				4A742AF32BF1044B00DB67BF /* SettingView.swift */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -202,17 +213,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A742AF62BF1059F00DB67BF /* SEPlayerManager.swift in Sources */,
 				4A1DB23A2BF0B4B800396724 /* Persistent.swift in Sources */,
 				4AA606332BF093E4004B2C31 /* PrefectureMatchingController.swift in Sources */,
 				4AA6062A2BF0898D004B2C31 /* ButtonUIView.swift in Sources */,
 				4A1DB2382BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld in Sources */,
 				4AA606372BF09B4C004B2C31 /* ResultView.swift in Sources */,
 				4AA6062C2BF08C74004B2C31 /* InputView.swift in Sources */,
+				4A742AF42BF1044B00DB67BF /* SettingView.swift in Sources */,
 				4AA606302BF08DD6004B2C31 /* bloodTypeSheet.swift in Sources */,
 				4A1DB23C2BF0B81400396724 /* RecordView.swift in Sources */,
 				4AA606352BF099B4004B2C31 /* ResultData.swift in Sources */,
 				4AA6063B2BF0A4F2004B2C31 /* PrefectureBriefView.swift in Sources */,
 				4A98D96E2BF07DB800C46D94 /* StartView.swift in Sources */,
+				4A742AF22BF100F000DB67BF /* BGMPlayerManager.swift in Sources */,
 				4A98D96C2BF07DB800C46D94 /* MatchMyPrefectureApp.swift in Sources */,
 				4AA6062E2BF08DC1004B2C31 /* birthdaySheet.swift in Sources */,
 			);
@@ -351,6 +365,7 @@
 				DEVELOPMENT_TEAM = 4J8L2WD7VW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MatchMyPrefecture/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -386,6 +401,7 @@
 				DEVELOPMENT_TEAM = 4J8L2WD7VW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MatchMyPrefecture/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

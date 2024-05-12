@@ -15,6 +15,7 @@ struct ResultView: View {
     @Binding var hasCoastLine: Bool
     @Binding var logoURL: URL
     @Binding var brief: String
+    @EnvironmentObject var sePlayerManager: SEPlayerManager
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -69,6 +70,8 @@ struct ResultView: View {
                             .foregroundColor(.blue)
                     }
                     Button {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        sePlayerManager.playClickSmall()
                         var transaction = Transaction()
                         transaction.disablesAnimations = true
                         withTransaction(transaction) {
@@ -82,7 +85,8 @@ struct ResultView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.top, 20)
                     
-                }.listStyle(PlainListStyle())
+                }
+                .listStyle(PlainListStyle())
             }
             .fullScreenCover(isPresented: $isShowingStartView) {
                 StartView()
