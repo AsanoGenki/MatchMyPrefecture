@@ -82,5 +82,10 @@ final class PrefectureMatchingController: ObservableObject {
         newItem.logoURL = result.logo_url.absoluteString
         newItem.prefecture = result.name
         newItem.createDate = Date()
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("セーブに失敗")
+        }
     }
 }
