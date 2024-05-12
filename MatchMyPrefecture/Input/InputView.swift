@@ -52,7 +52,7 @@ struct InputView: View {
                     //文字数を127文字以内に制限する
                     .onReceive(Just(dataController.userName)) { _ in
                         if dataController.userName.count > 127 {
-                            dataController.userName = String(dataController.userName.prefix(30))
+                            dataController.userName = String(dataController.userName.prefix(127))
                         }
                     }
                     .font(.system(size: 18))
