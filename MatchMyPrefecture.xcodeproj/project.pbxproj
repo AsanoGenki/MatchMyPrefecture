@@ -16,6 +16,9 @@
 		4AA6062E2BF08DC1004B2C31 /* birthdaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6062D2BF08DC1004B2C31 /* birthdaySheet.swift */; };
 		4AA606302BF08DD6004B2C31 /* bloodTypeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6062F2BF08DD6004B2C31 /* bloodTypeSheet.swift */; };
 		4AA606332BF093E4004B2C31 /* PrefectureMatchingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */; };
+		4AA606352BF099B4004B2C31 /* ResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606342BF099B4004B2C31 /* ResultData.swift */; };
+		4AA606372BF09B4C004B2C31 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606362BF09B4C004B2C31 /* ResultView.swift */; };
+		4AA6063B2BF0A4F2004B2C31 /* PrefectureBriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6063A2BF0A4F2004B2C31 /* PrefectureBriefView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		4AA6062D2BF08DC1004B2C31 /* birthdaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = birthdaySheet.swift; sourceTree = "<group>"; };
 		4AA6062F2BF08DD6004B2C31 /* bloodTypeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bloodTypeSheet.swift; sourceTree = "<group>"; };
 		4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefectureMatchingController.swift; sourceTree = "<group>"; };
+		4AA606342BF099B4004B2C31 /* ResultData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultData.swift; sourceTree = "<group>"; };
+		4AA606362BF09B4C004B2C31 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		4AA6063A2BF0A4F2004B2C31 /* PrefectureBriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefectureBriefView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +68,10 @@
 			isa = PBXGroup;
 			children = (
 				4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */,
-				4A98D96D2BF07DB800C46D94 /* StartView.swift */,
+				4AA6063F2BF0AB33004B2C31 /* Start */,
 				4AA606312BF09256004B2C31 /* Input */,
-				4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */,
+				4AA6063D2BF0AB22004B2C31 /* Result */,
+				4AA6063E2BF0AB2C004B2C31 /* Data */,
 				4AA606292BF0898D004B2C31 /* ButtonUIView.swift */,
 				4A98D96F2BF07DBA00C46D94 /* Assets.xcassets */,
 				4A98D9712BF07DBA00C46D94 /* Preview Content */,
@@ -88,6 +95,32 @@
 				4AA6062F2BF08DD6004B2C31 /* bloodTypeSheet.swift */,
 			);
 			path = Input;
+			sourceTree = "<group>";
+		};
+		4AA6063D2BF0AB22004B2C31 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				4AA606362BF09B4C004B2C31 /* ResultView.swift */,
+				4AA6063A2BF0A4F2004B2C31 /* PrefectureBriefView.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		4AA6063E2BF0AB2C004B2C31 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */,
+				4AA606342BF099B4004B2C31 /* ResultData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4AA6063F2BF0AB33004B2C31 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				4A98D96D2BF07DB800C46D94 /* StartView.swift */,
+			);
+			path = Start;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,8 +195,11 @@
 			files = (
 				4AA606332BF093E4004B2C31 /* PrefectureMatchingController.swift in Sources */,
 				4AA6062A2BF0898D004B2C31 /* ButtonUIView.swift in Sources */,
+				4AA606372BF09B4C004B2C31 /* ResultView.swift in Sources */,
 				4AA6062C2BF08C74004B2C31 /* InputView.swift in Sources */,
 				4AA606302BF08DD6004B2C31 /* bloodTypeSheet.swift in Sources */,
+				4AA606352BF099B4004B2C31 /* ResultData.swift in Sources */,
+				4AA6063B2BF0A4F2004B2C31 /* PrefectureBriefView.swift in Sources */,
 				4A98D96E2BF07DB800C46D94 /* StartView.swift in Sources */,
 				4A98D96C2BF07DB800C46D94 /* MatchMyPrefectureApp.swift in Sources */,
 				4AA6062E2BF08DC1004B2C31 /* birthdaySheet.swift in Sources */,

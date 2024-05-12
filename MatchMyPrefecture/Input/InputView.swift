@@ -13,6 +13,7 @@ struct InputView: View {
     @State private var editting = false
     @State private var isShowingBirthdaySheet = false
     @State private var isShowingBloodTypeSheet = false
+    @State var isShowingResultView = false
     @FocusState var focus: Bool
     //ユーザーネームが記述されたときに"占う"ボタンが使えるようにする
     var buttonEnable: Bool {
@@ -108,6 +109,21 @@ struct InputView: View {
                         }
                 }
                 Button {
+                    if dataController.bloodType == "AB型" {
+                        dataController.bloodTypeReplace = "ab"
+                    } else {
+                        dataController.bloodTypeReplace = dataController.bloodType.first!.description.lowercased()
+                    }
+                    
+                    Task {
+                        await dataController.readFortuneTelling()
+                    }
+                    
+                    var transaction = Transaction()
+                    transaction.disablesAnimations = true
+                    withTransaction(transaction) {
+                        isShowingResultView = true
+                    }
                 } label: {
                     ButtonUIView(text: "占う", color: .green, backColor: .yellow)
                         .saturation(buttonEnable ? 1 : 0)
@@ -124,6 +140,13 @@ struct InputView: View {
             .sheet(isPresented: $isShowingBloodTypeSheet) {
                 bloodTypeSheet(bloodType: $dataController.bloodType)
                     .presentationDetents([.fraction(0.35)])
+            }
+            .fullScreenCover(isPresented: $isShowingResultView) {
+                ResultView(
+                    prefecture: $dataController.result.name,
+                    capital: $dataController.result.capital,
+                    citizanDay: $dataController.result.citizen_day,
+                    hasCoastLine: $dataController.result.has_coast_line, logoURL: $dataController.result.logo_url, brief: $dataController.result.brief)
             }
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
