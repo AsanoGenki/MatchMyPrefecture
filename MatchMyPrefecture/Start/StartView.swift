@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct StartView: View {
-    @State private var isShowingInputView = false
     @State private var isShowingRecordView = false
     @State private var isShowingSettingView = false
+    @State private var isShowingMainFortune = false
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var bgmPlayerManager: BGMPlayerManager
     @EnvironmentObject var sePlayerManager: SEPlayerManager
@@ -40,17 +40,17 @@ struct StartView: View {
                     Button {
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         sePlayerManager.playClickNormal()
-                        isShowingInputView.toggle()
+                        var transaction = Transaction()
+                        transaction.disablesAnimations = true
+                        withTransaction(transaction) {
+                            isShowingMainFortune = true
+                        }
                     } label: {
                         ButtonUIView(text: "はじめる", color: .green, backColor: .yellow)
                     }
                     .padding(.bottom)
-                    .navigationDestination(isPresented: $isShowingInputView, destination: {
-                        InputView()
-                    })
                     .navigationDestination(isPresented: $isShowingRecordView, destination: {
-                        RecordView()
-                        
+                        RecordView()                        
                     })
                     .sheet(isPresented: $isShowingSettingView) {
                         SettingView()
@@ -89,6 +89,9 @@ struct StartView: View {
                 bgmPlayerManager.stopBGM()                
             @unknown default: break
             }
+        }
+        .fullScreenCover(isPresented: $isShowingMainFortune) {
+            MainFortuneView()
         }
     }
 }

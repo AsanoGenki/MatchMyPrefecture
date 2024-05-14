@@ -13,8 +13,8 @@ struct RecordView: View {
     var resultItems: FetchedResults<FortuneResult>
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject private var networkMonitor: NetworkMonitor
-    @State private var showNetworkError = false
-    @State private var showAllDeleteAlert = false
+    @State private var isShowingNetworkError = false
+    @State private var isShowingAllDeleteAlert = false
     @State var sortOrder = "新しい順"
     var body: some View {
         List {
@@ -57,11 +57,11 @@ struct RecordView: View {
         }
         .navigationBarTitle("", displayMode: .inline)
         .listStyle(.plain)
-        .alert("ネットワークエラー", isPresented: $showNetworkError) {
+        .alert("ネットワークエラー", isPresented: $isShowingNetworkError) {
         } message: {
             Text("都道府県の画像を表示するにはインターネットに接続してください。")
         }
-        .alert("履歴を全て削除する", isPresented: $showAllDeleteAlert) {
+        .alert("履歴を全て削除する", isPresented: $isShowingAllDeleteAlert) {
             Button("キャンセル", role: .cancel) {}
             Button("削除する", role: .destructive) {
                 deleteAllItems()
@@ -71,7 +71,7 @@ struct RecordView: View {
         }
         .onAppear {
             if !networkMonitor.isConnected {
-                showNetworkError = true
+                isShowingNetworkError = true
             }
         }
         .toolbar {
@@ -84,7 +84,7 @@ struct RecordView: View {
         .navigationBarItems(
             trailing: HStack {
                 Button(action: {
-                    showAllDeleteAlert = true
+                    isShowingAllDeleteAlert = true
                 }, label: {
                     Image(systemName: "trash")
                         .foregroundColor(.red)

@@ -8,14 +8,7 @@
 import SwiftUI
 
 struct ResultView: View {
-    @State var isShowingStartView = false
-    @State var showErrorAlert = false
-    @Binding var prefecture: String
-    @Binding var capital: String
-    @Binding var citizanDay: ResultData.MonthDay?
-    @Binding var hasCoastLine: Bool
-    @Binding var logoURL: URL
-    @Binding var brief: String
+    @State var isShowErrorAlert = false
     @EnvironmentObject var sePlayerManager: SEPlayerManager
     @EnvironmentObject var dataController: PrefectureMatchingController
     @Environment(\.dismiss) private var dismiss
@@ -34,10 +27,10 @@ struct ResultView: View {
                         .padding(.bottom, 10)
                         .listRowSeparator(.hidden)
                     VStack(alignment: .center) {
-                        Text(prefecture)
+                        Text(dataController.result.name)
                             .font(.system(size: 30))
                             .fontWeight(.semibold)
-                        AsyncImage(url: logoURL, scale: 3) { image in
+                        AsyncImage(url: dataController.result.logo_url, scale: 3) { image in
                             image
                                 .resizable()
                                 .scaledToFit()
@@ -49,16 +42,16 @@ struct ResultView: View {
                     }.frame(maxWidth: .infinity)
                         .listRowSeparator(.hidden)
                     Section("基本情報") {
-                        Text("県庁所在地: \(capital)")
+                        Text("県庁所在地: \(dataController.result.capital)")
                         Text("県民の日: ")
-                        + Text(citizanDay != nil ? "\(citizanDay!.month)月\(citizanDay!.day)日" : "なし")
+                        + Text(dataController.result.citizen_day != nil ? "\(dataController.result.citizen_day!.month)月\(dataController.result.citizen_day!.day)日" : "なし")
                         Text("海岸線: ")
-                        + Text(hasCoastLine ? "あり" : "なし")
+                        + Text(dataController.result.has_coast_line ? "あり" : "なし")
                     }
                     .font(.system(size: 18))
                     .fontWeight(.semibold)
                     NavigationLink {
-                        PrefectureBriefView(prefecture: $prefecture, brief: $brief)
+                        PrefectureBriefView(prefecture: $dataController.result.name, brief: $dataController.result.brief)
                             .toolbar {
                                 ToolbarItem(placement: .principal) {
                                     Text("特徴")
@@ -75,11 +68,8 @@ struct ResultView: View {
                     Button {
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         sePlayerManager.playClickSmall()
-                        var transaction = Transaction()
-                        transaction.disablesAnimations = true
-                        withTransaction(transaction) {
-                            isShowingStartView = true
-                        }
+                        dismiss()
+                        dataController.readFortune = false
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             // 入力値を初期値に戻す
                             dataController.userName = ""
@@ -98,26 +88,23 @@ struct ResultView: View {
                 }
                 .listStyle(PlainListStyle())
             }
-            .alert(dataController.errorMessage, isPresented: $showErrorAlert) {
+            .alert(dataController.errorMessage, isPresented: $isShowErrorAlert) {
                 Button("OK") {
                     dataController.readAPIError = false
-                    dismiss()
+                    dataController.readFortune = false
                 }
             } message: {
                 Text(dataController.errorMessageDetail)
             }
             .onAppear {
                 if dataController.readAPIError {
-                    showErrorAlert = true
+                    isShowErrorAlert = true
                 }
             }
             .onChange(of: dataController.readAPIError) { isError in
                 if isError {
-                    showErrorAlert = true
+                    isShowErrorAlert = true
                 }
-            }
-            .fullScreenCover(isPresented: $isShowingStartView) {
-                StartView()
             }
         }
     }

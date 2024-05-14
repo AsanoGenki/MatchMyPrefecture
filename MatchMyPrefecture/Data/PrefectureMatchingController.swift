@@ -15,6 +15,7 @@ final class PrefectureMatchingController: ObservableObject {
     @Published var bloodType = "A型"
     @Published var result: ResultData = ResultData()
     @Published var readAPIError = false
+    @Published var readFortune = false
     @Published var errorMessage = ""
     @Published var errorMessageDetail = ""
     var bloodTypeReplace = "a"
