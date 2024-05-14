@@ -12,6 +12,8 @@ struct RecordView: View {
     @FetchRequest(sortDescriptors: [])
     var resultItems: FetchedResults<FortuneResult>
     @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject private var networkMonitor: NetworkMonitor
+    @State private var showNetworkError = false
     var body: some View {
         List {
             ForEach(resultItems, id: \.self) { item in
@@ -53,6 +55,15 @@ struct RecordView: View {
         }
         .navigationBarTitle("", displayMode: .inline)
         .listStyle(.plain)
+        .alert("ネットワークエラー", isPresented: $showNetworkError) {
+        } message: {
+            Text("都道府県の画像を表示するにはインターネットに接続してください。")
+        }
+        .onAppear {
+            if !networkMonitor.isConnected {
+                showNetworkError = true
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("履歴")

@@ -10,7 +10,7 @@ import SwiftUI
 
 //一部ChatGPTを使用して作成  プロンプト: アプリ起動時にBGMを流して、設定画面からそのBGMをオンオフできるアプリをSwiftUIで作成
 //BGM処理
-class BGMPlayerManager: ObservableObject {
+final class BGMPlayerManager: ObservableObject {
     static let shared = BGMPlayerManager()
     private var audioPlayer: AVAudioPlayer?
     //BGMのオンオフをAppStorageに保存

@@ -8,7 +8,7 @@
 import SwiftUI
 import AVFoundation
 
-class SEPlayerManager: ObservableObject {
+final class SEPlayerManager: ObservableObject {
     static let shared = SEPlayerManager()
     private let clickNomalSound = try!  AVAudioPlayer(data: NSDataAsset(name: "SE_click_normal")!.data)
     private let clickSmallSound = try! AVAudioPlayer(data: NSDataAsset(name: "SE_click_small")!.data)

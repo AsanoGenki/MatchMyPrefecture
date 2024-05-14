@@ -10,7 +10,7 @@ import Combine
 import CoreData
 
 struct InputView: View {
-    @ObservedObject var dataController = PrefectureMatchingController()
+    @EnvironmentObject var dataController: PrefectureMatchingController
     @State private var editting = false
     @State private var isShowingBirthdaySheet = false
     @State private var isShowingBloodTypeSheet = false

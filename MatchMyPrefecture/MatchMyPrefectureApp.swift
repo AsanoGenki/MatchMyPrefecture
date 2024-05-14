@@ -11,6 +11,8 @@ import SwiftUI
 struct MatchMyPrefectureApp: App {
     @StateObject var bgmPlayerManager = BGMPlayerManager.shared
     @StateObject var sePlayerManager = SEPlayerManager.shared
+    @StateObject var prefectureMatchingController = PrefectureMatchingController.shared
+    @StateObject var networkMonitor = NetworkMonitor.shared
     let persistenceController = PersistenceController()
     var body: some Scene {
         WindowGroup {
@@ -21,6 +23,8 @@ struct MatchMyPrefectureApp: App {
                 )
                 .environmentObject(bgmPlayerManager)
                 .environmentObject(sePlayerManager)
+                .environmentObject(prefectureMatchingController)
+                .environmentObject(networkMonitor)
         }
     }
 }

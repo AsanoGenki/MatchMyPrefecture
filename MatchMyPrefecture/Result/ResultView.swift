@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ResultView: View {
     @State var isShowingStartView = false
+    @State var showErrorAlert = false
     @Binding var prefecture: String
     @Binding var capital: String
     @Binding var citizanDay: ResultData.MonthDay?
@@ -16,6 +17,8 @@ struct ResultView: View {
     @Binding var logoURL: URL
     @Binding var brief: String
     @EnvironmentObject var sePlayerManager: SEPlayerManager
+    @EnvironmentObject var dataController: PrefectureMatchingController
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -77,6 +80,13 @@ struct ResultView: View {
                         withTransaction(transaction) {
                             isShowingStartView = true
                         }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            // 入力値を初期値に戻す
+                            dataController.userName = ""
+                            dataController.birthDay = Date()
+                            dataController.bloodType = "A型"
+                            dataController.result = ResultData()
+                        }
                     } label: {
                         ButtonUIView(text: "ホームに戻る", color: .green, backColor: .yellow)
                     }
@@ -87,6 +97,24 @@ struct ResultView: View {
                     
                 }
                 .listStyle(PlainListStyle())
+            }
+            .alert(dataController.errorMessage, isPresented: $showErrorAlert) {
+                Button("OK") {
+                    dataController.readAPIError = false
+                    dismiss()
+                }
+            } message: {
+                Text(dataController.errorMessageDetail)
+            }
+            .onAppear {
+                if dataController.readAPIError {
+                    showErrorAlert = true
+                }
+            }
+            .onChange(of: dataController.readAPIError) { isError in
+                if isError {
+                    showErrorAlert = true
+                }
             }
             .fullScreenCover(isPresented: $isShowingStartView) {
                 StartView()

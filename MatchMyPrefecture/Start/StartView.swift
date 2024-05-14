@@ -54,7 +54,7 @@ struct StartView: View {
                     })
                     .sheet(isPresented: $isShowingSettingView) {
                         SettingView()
-                            .presentationDetents([ .fraction(0.4)])
+                            .presentationDetents([ .fraction(0.33)])
                     }
                     .navigationBarItems(
                         leading: Button {

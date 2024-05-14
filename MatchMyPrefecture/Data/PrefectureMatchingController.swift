@@ -9,17 +9,25 @@ import SwiftUI
 import CoreData
 
 final class PrefectureMatchingController: ObservableObject {
+    static let shared = PrefectureMatchingController()
     @Published var userName = ""
     @Published var birthDay = Date()
     @Published var bloodType = "A型"
     @Published var result: ResultData = ResultData()
+    @Published var readAPIError = false
+    @Published var errorMessage = ""
+    @Published var errorMessageDetail = ""
     var bloodTypeReplace = "a"
     let calendar = Calendar(identifier: .gregorian)
     let now = Date()
     //占い結果を取得するAPIの処理
     func readFortuneTelling(viewContext: NSManagedObjectContext) async {
         guard let url = URL(string: "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud/my_fortune") else {
-            print("error")
+            DispatchQueue.main.async {
+                self.errorMessage = "URLエラー"
+                self.errorMessageDetail = "有効なURLが見つかりません。もう一度お試しください。"
+                self.readAPIError = true
+            }
             return
         }
         var request = URLRequest(url: url)
@@ -41,19 +49,41 @@ final class PrefectureMatchingController: ObservableObject {
             ]
         ]
         // 受け取ったデータの入力(ユーザーネーム、誕生日、血液型等)
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: users) else { return }
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: users) else {
+            self.errorMessage = "エラー"
+            self.errorMessageDetail = "JSONのシリアル化に失敗しました。"
+            self.readAPIError = true
+            return
+        }
         request.httpBody = httpBody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                DispatchQueue.main.async {
+                    self.errorMessage = "ネットワークエラー"
+                    self.errorMessageDetail = "インターネットに接続してもう一度お試しください。"
+                    self.readAPIError = true
+                }
+                return
+            }
             guard let data = data,
-                  let response = response as? HTTPURLResponse,
-                  error == nil
+                  let response = response as? HTTPURLResponse
             else {
                 print("error", error ?? URLError(.badServerResponse))
+                DispatchQueue.main.async {
+                    self.errorMessage = "サーバーエラー"
+                    self.errorMessageDetail = "サーバーからの応答が不正です。もう一度お試しください。"
+                    self.readAPIError = true
+                }
                 return
             }            
             guard (200...299) ~= response.statusCode else {
                 print("statusCode should be 2xx, but is \(response.statusCode)")
                 print("response = \(response)")
+                DispatchQueue.main.async {
+                    self.errorMessage = "HTTPエラー"
+                    self.errorMessageDetail = "サーバーエラーが発生しました。ステータスコード: \(response.statusCode)。"
+                    self.readAPIError = true
+                }
                 return
             }
             do {
@@ -64,11 +94,16 @@ final class PrefectureMatchingController: ObservableObject {
                 }
                 self.addResultToCoreData(result: responseObject, viewContext: viewContext)
             } catch {
+                DispatchQueue.main.async {
+                    self.errorMessage = "デコードエラー"
+                    self.errorMessageDetail = "サーバーからのデータの解析に失敗しました。もう一度お試しください。"
+                    self.readAPIError = true
+                }
                 print(error)
                 if let responseString = String(data: data, encoding: .utf8) {
                     print("responseString = \(responseString)")
                 } else {
-                    print("unable to parse response as string")
+                    print("解析に失敗したデータを文字列として表示できません。")
                 }
             }
         }
