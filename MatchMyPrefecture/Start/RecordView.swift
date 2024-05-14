@@ -9,11 +9,13 @@ import SwiftUI
 import CoreData
 
 struct RecordView: View {
-    @FetchRequest(sortDescriptors: [])
+    @FetchRequest(sortDescriptors: [SortDescriptor(\FortuneResult.createDate, order: .reverse)])
     var resultItems: FetchedResults<FortuneResult>
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject private var networkMonitor: NetworkMonitor
     @State private var showNetworkError = false
+    @State private var showAllDeleteAlert = false
+    @State var sortOrder = "新しい順"
     var body: some View {
         List {
             ForEach(resultItems, id: \.self) { item in
@@ -59,6 +61,14 @@ struct RecordView: View {
         } message: {
             Text("都道府県の画像を表示するにはインターネットに接続してください。")
         }
+        .alert("履歴を全て削除する", isPresented: $showAllDeleteAlert) {
+            Button("キャンセル", role: .cancel) {}
+            Button("削除する", role: .destructive) {
+                deleteAllItems()
+            }
+        } message: {
+            Text("この操作は取り消せません。本当に実行しますか？")
+        }
         .onAppear {
             if !networkMonitor.isConnected {
                 showNetworkError = true
@@ -70,17 +80,65 @@ struct RecordView: View {
                     .font(.system(size: 18))
                     .fontWeight(.semibold)
             }
-            
         }
+        .navigationBarItems(
+            trailing: HStack {
+                Button(action: {
+                    showAllDeleteAlert = true
+                }, label: {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                })
+                Menu {
+                    Button {
+                        sortOrder = "新しい順"
+                        resultItems.sortDescriptors = [SortDescriptor(\FortuneResult.createDate, order: .reverse)]
+                    } label: {
+                        HStack {
+                            Text("新しい順")
+                            Spacer()
+                            if sortOrder == "新しい順" {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                    Button {
+                        sortOrder = "古い順"
+                        resultItems.sortDescriptors = [SortDescriptor(\FortuneResult.createDate, order: .forward)]
+                    } label: {
+                        HStack {
+                            Text("古い順")
+                            Spacer()
+                            if sortOrder == "古い順" {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                    Button {
+                        sortOrder = "名前順"
+                        resultItems.sortDescriptors = [SortDescriptor(\FortuneResult.userName, order: .forward)]
+                    } label: {
+                        HStack {
+                            Text("名前順")
+                            Spacer()
+                            if sortOrder == "名前順" {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                } label: {
+                    Image(systemName: "slider.horizontal.3")
+                }
+            })
     }
     // Date型のデータをString型にする
-    func dateToString(dateString: Date) -> String? {
+    private func dateToString(dateString: Date) -> String? {
         let formatter: DateFormatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .gregorian)
         formatter.dateFormat = "yyyy/MM/dd"
         return formatter.string(from: dateString)
     }
-    func removeFortuneCoreData(at offsets: IndexSet) {
+    private func removeFortuneCoreData(at offsets: IndexSet) {
         for index in offsets {
             let deleteItem = resultItems[index]
             viewContext.delete(deleteItem)
@@ -89,6 +147,18 @@ struct RecordView: View {
             try viewContext.save()
         } catch {
             fatalError("セーブに失敗")
+        }
+    }
+    private func deleteAllItems() {
+        // Fetchした全てのアイテムを削除
+        for item in resultItems {
+            viewContext.delete(item)
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 }
