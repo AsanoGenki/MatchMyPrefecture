@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct birthdaySheet: View {
+struct BirthdaySheet: View {
     @Binding var birthDay: Date
     @Environment(\.dismiss) private var dismiss
     var body: some View {
@@ -20,7 +20,6 @@ struct birthdaySheet: View {
             .environment(\.locale, Locale(identifier: "ja_JP"))
             .datePickerStyle(.wheel)
             .labelsHidden()
-            
             .navigationBarItems(
                 trailing: Button("OK") {
                     dismiss()
@@ -32,9 +31,9 @@ struct birthdaySheet: View {
     }
 }
 
-struct birthdaySheet_Previews: PreviewProvider {
+struct BirthdaySheet_Previews: PreviewProvider {
     @State static var birthDay: Date = Date()
     static var previews: some View {
-        birthdaySheet(birthDay: $birthDay)
+        BirthdaySheet(birthDay: $birthDay)
     }
 }

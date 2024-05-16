@@ -50,7 +50,7 @@ struct StartView: View {
                     }
                     .padding(.bottom)
                     .navigationDestination(isPresented: $isShowingRecordView, destination: {
-                        RecordView()                        
+                        RecordView()
                     })
                     .sheet(isPresented: $isShowingSettingView) {
                         SettingView()
@@ -86,7 +86,7 @@ struct StartView: View {
             case .inactive:
                 bgmPlayerManager.stopBGM()
             case .background:
-                bgmPlayerManager.stopBGM()                
+                bgmPlayerManager.stopBGM()
             @unknown default: break
             }
         }

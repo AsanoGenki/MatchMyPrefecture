@@ -22,15 +22,15 @@ struct ResultView: View {
                     }
                     .font(.system(size: 28))
                     .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 30)
-                        .padding(.bottom, 10)
-                        .listRowSeparator(.hidden)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 30)
+                    .padding(.bottom, 10)
+                    .listRowSeparator(.hidden)
                     VStack(alignment: .center) {
                         Text(dataController.result.name)
                             .font(.system(size: 30))
                             .fontWeight(.semibold)
-                        AsyncImage(url: dataController.result.logo_url, scale: 3) { image in
+                        AsyncImage(url: dataController.result.logoUrl, scale: 3) { image in
                             image
                                 .resizable()
                                 .scaledToFit()
@@ -38,27 +38,32 @@ struct ResultView: View {
                             ProgressView()
                         }
                         .frame(maxWidth: geometry.size.width * 0.6)
-                        
                     }.frame(maxWidth: .infinity)
                         .listRowSeparator(.hidden)
                     Section("基本情報") {
                         Text("県庁所在地: \(dataController.result.capital)")
                         Text("県民の日: ")
-                        + Text(dataController.result.citizen_day != nil ? "\(dataController.result.citizen_day!.month)月\(dataController.result.citizen_day!.day)日" : "なし")
+                        + Text(dataController.result.citizenDay != nil ?
+                               ["\(dataController.result.citizenDay!.month)月",
+                                "\(dataController.result.citizenDay!.day)日"].joined()
+                               : "なし")
                         Text("海岸線: ")
-                        + Text(dataController.result.has_coast_line ? "あり" : "なし")
+                        + Text(dataController.result.hasCoastLine ? "あり" : "なし")
                     }
                     .font(.system(size: 18))
                     .fontWeight(.semibold)
                     NavigationLink {
-                        PrefectureBriefView(prefecture: $dataController.result.name, brief: $dataController.result.brief)
-                            .toolbar {
-                                ToolbarItem(placement: .principal) {
-                                    Text("特徴")
-                                        .font(.system(size: 18))
-                                        .fontWeight(.semibold)
-                                }
+                        PrefectureBriefView(
+                            prefecture: $dataController.result.name,
+                            brief: $dataController.result.brief
+                        )
+                        .toolbar {
+                            ToolbarItem(placement: .principal) {
+                                Text("特徴")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
                             }
+                        }
                     } label: {
                         Text("特徴")
                             .font(.system(size: 18))
@@ -81,10 +86,9 @@ struct ResultView: View {
                         ButtonUIView(text: "ホームに戻る", color: .green, backColor: .yellow)
                     }
                     .listRowSeparator(.hidden)
-                        .buttonStyle(PlainButtonStyle())
-                        .frame(maxWidth: .infinity)
-                        .padding(.top, 20)
-                    
+                    .buttonStyle(PlainButtonStyle())
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 20)
                 }
                 .listStyle(PlainListStyle())
             }

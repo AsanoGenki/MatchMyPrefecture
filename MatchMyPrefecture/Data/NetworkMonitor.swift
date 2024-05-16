@@ -26,4 +26,3 @@ final class NetworkMonitor: ObservableObject {
         self.monitor.start(queue: self.queue)
     }
 }
-

@@ -50,7 +50,6 @@ struct InputView: View {
                             } else {
                                 self.editting = false
                             }
-                            
                         })
                         .focused(self.$focus)
                         // 文字数を127文字以内に制限する
@@ -61,10 +60,13 @@ struct InputView: View {
                         }
                         .font(.system(size: 18))
                         .padding(.all)
-                        .background{
+                        .background {
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(
-                                    editting && !isShowingBirthdaySheet && !isShowingBloodTypeSheet ? Color.green : Color(UIColor.separator),
+                                    editting
+                                    && !isShowingBirthdaySheet
+                                    && !isShowingBloodTypeSheet
+                                    ? Color.green : Color(UIColor.separator),
                                     lineWidth: 3
                                 )
                         }
@@ -76,7 +78,7 @@ struct InputView: View {
                         Text(dateToString(dateString: dataController.birthDay)!)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.all)
-                            .background{
+                            .background {
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(
                                         isShowingBirthdaySheet ? Color.green : Color(UIColor.separator),
@@ -96,10 +98,9 @@ struct InputView: View {
                             .fontWeight(.semibold)
                         Text(dataController.bloodType)
                             .font(.system(size: 18))
-                        
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.all)
-                            .background{
+                            .background {
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(
                                         isShowingBloodTypeSheet ? Color.green : Color(UIColor.separator),
@@ -134,11 +135,11 @@ struct InputView: View {
                 }
                 .padding(.horizontal)
                 .sheet(isPresented: $isShowingBirthdaySheet) {
-                    birthdaySheet(birthDay: $dataController.birthDay)
+                    BirthdaySheet(birthDay: $dataController.birthDay)
                         .presentationDetents([.fraction(0.35)])
                 }
                 .sheet(isPresented: $isShowingBloodTypeSheet) {
-                    bloodTypeSheet(bloodType: $dataController.bloodType)
+                    BloodTypeSheet(bloodType: $dataController.bloodType)
                         .presentationDetents([.fraction(0.35)])
                 }
             }

@@ -20,15 +20,16 @@ struct ButtonUIView: View {
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 100).fill(backColor.opacity(1)))
                 .padding(.top, 14)
-            
             Text(text)
                 .frame(minWidth: 150)
                 .foregroundColor(.white)
                 .font(.system(size: 23))
                 .fontWeight(.semibold)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 100).fill(color.opacity(1)))
-            
+                .background(
+                    RoundedRectangle(cornerRadius: 100)
+                        .fill(color.opacity(1))
+                )
         }
     }
 }

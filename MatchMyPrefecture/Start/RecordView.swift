@@ -20,7 +20,7 @@ struct RecordView: View {
         List {
             ForEach(resultItems, id: \.self) { item in
                 HStack {
-                    VStack (alignment: .leading, spacing: 5) {
+                    VStack(alignment: .leading, spacing: 5) {
                         Text(item.userName!)
                             .font(.system(size: 20))
                             .fontWeight(.semibold)

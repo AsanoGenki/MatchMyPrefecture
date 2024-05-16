@@ -31,7 +31,6 @@ struct SettingView: View {
             .fontWeight(.semibold)
             .padding(.horizontal, 40)
             .navigationBarTitle("", displayMode: .inline)
-            
             .navigationBarItems(trailing: Button(action: {
                 dismiss()
             }, label: {
@@ -47,7 +46,6 @@ struct SettingView: View {
                         .fontWeight(.semibold)
                 }
             }
-            
         }
     }
 }

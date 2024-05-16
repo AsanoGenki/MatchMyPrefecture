@@ -14,9 +14,8 @@ struct ResultData: Codable {
     }
     var name: String = "◯◯県"
     var capital: String = "◯◯市"
-    var citizen_day: MonthDay? = MonthDay(month: 0, day: 0)
-    var has_coast_line: Bool = true
-    var logo_url: URL = URL(string: "https://japan-map.com/wp-content/uploads/toyama.png")!
+    var citizenDay: MonthDay? = MonthDay(month: 0, day: 0)
+    var hasCoastLine: Bool = true
+    var logoUrl: URL = URL(string: "https://japan-map.com/wp-content/uploads/toyama.png")!
     var brief: String = "検索中..."
 }
-

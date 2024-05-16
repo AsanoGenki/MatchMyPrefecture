@@ -10,23 +10,37 @@ import AVFoundation
 
 final class SEPlayerManager: ObservableObject {
     static let shared = SEPlayerManager()
-    private let clickNomalSound = try!  AVAudioPlayer(data: NSDataAsset(name: "SE_click_normal")!.data)
-    private let clickSmallSound = try! AVAudioPlayer(data: NSDataAsset(name: "SE_click_small")!.data)
+    private var clickNomalSound: AVAudioPlayer?
+    private var clickSmallSound: AVAudioPlayer?
     @AppStorage("soundEffect") var isPlayingSE = true
-    func playClickNormal() {
-        if isPlayingSE {
-            clickNomalSound.volume = 0.7
-            clickNomalSound.play()
-        } else {
-            return
+    init() {
+        do {
+            if let clickNomalData = NSDataAsset(name: "SE_click_normal")?.data {
+                clickNomalSound = try AVAudioPlayer(data: clickNomalData)
+                clickNomalSound?.volume = 0.7
+            } else {
+                print("Error loading SE_click_normal data.")
+            }
+            if let clickSmallData = NSDataAsset(name: "SE_click_small")?.data {
+                clickSmallSound = try AVAudioPlayer(data: clickSmallData)
+                clickSmallSound?.volume = 0.7
+            } else {
+                print("Error loading SE_click_small data.")
+            }
+        } catch {
+            print("Error initializing AVAudioPlayer: \(error)")
         }
     }
-    func playClickSmall() {
-        if isPlayingSE {
-            clickSmallSound.volume = 0.7
-            clickSmallSound.play()
-        } else {
+    func playClickNormal() {
+        guard isPlayingSE else {
             return
         }
+        clickNomalSound?.play()
+    }
+    func playClickSmall() {
+        guard isPlayingSE else {
+            return
+        }
+        clickSmallSound?.play()
     }
 }
