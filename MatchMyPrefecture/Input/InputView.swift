@@ -114,17 +114,22 @@ struct InputView: View {
                             }
                     }
                     Button {
-                        if dataController.bloodType == "AB型" {
-                            dataController.bloodTypeReplace = "ab"
-                        } else {
-                            dataController.bloodTypeReplace = dataController.bloodType.first!.description.lowercased()
+                        self.focus = false
+                        DispatchQueue.main.async {
+                            if dataController.bloodType == "AB型" {
+                                dataController.bloodTypeReplace = "ab"
+                            } else {
+                                dataController.bloodTypeReplace = dataController.bloodType.first!.description.lowercased()
+                            }
+                            sePlayerManager.playClickNormal()
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         }
                         Task {
                             await dataController.readFortuneTelling(viewContext: viewContext)
                         }
-                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                        sePlayerManager.playClickNormal()
-                        dataController.readFortune = true
+                        DispatchQueue.main.async {
+                            dataController.readFortune = true
+                        }
                     } label: {
                         ButtonUIView(text: "占う", color: .green, backColor: .yellow)
                             .saturation(buttonEnable ? 1 : 0)
@@ -147,9 +152,11 @@ struct InputView: View {
                 leading: Button(action: {
                         dismiss()
                     // 入力値を初期値に戻す
-                    dataController.userName = ""
-                    dataController.birthDay = Date()
-                    dataController.bloodType = "A型"
+                    DispatchQueue.main.async {
+                        dataController.userName = ""
+                        dataController.birthDay = Date()
+                        dataController.bloodType = "A型"
+                    }
                 }, label: {
                     Text("戻る")
                         .font(.system(size: 18))

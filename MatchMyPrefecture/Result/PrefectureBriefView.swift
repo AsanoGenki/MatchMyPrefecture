@@ -15,6 +15,7 @@ struct PrefectureBriefView: View {
             Text(brief)
                 .padding(.top, 20)
                 .lineSpacing(7)
+                .frame(maxWidth: .infinity, alignment: .leading)
             if let url = wikiURL(prefecture: prefecture) {
                 Link("ウィキペディアでもっと詳しく読む", destination: url)
             }

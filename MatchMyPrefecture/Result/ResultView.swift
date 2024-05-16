@@ -75,7 +75,9 @@ struct ResultView: View {
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         sePlayerManager.playClickSmall()
                         dismiss()
-                        dataController.readFortune = false
+                        DispatchQueue.main.async {
+                            dataController.readFortune = false
+                        }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             // 入力値を初期値に戻す
                             dataController.userName = ""
@@ -96,7 +98,9 @@ struct ResultView: View {
             .alert(errorManager.errorMessage, isPresented: $isShowErrorAlert) {
                 Button("OK") {
                     errorManager.isShowingError = false
-                    dataController.readFortune = false
+                    DispatchQueue.main.async {
+                        dataController.readFortune = false
+                    }
                 }
             } message: {
                 Text(errorManager.errorMessageDetail)
