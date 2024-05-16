@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ResultView: View {
-    @State var isShowErrorAlert = false
-    @EnvironmentObject var sePlayerManager: SEPlayerManager
-    @EnvironmentObject var dataController: PrefectureMatchingController
+    @State private var isShowErrorAlert = false
+    @EnvironmentObject private var sePlayerManager: SEPlayerManager
+    @EnvironmentObject private var dataController: PrefectureMatchingController
+    @EnvironmentObject private var errorManager: ErrorManager
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationStack {
@@ -92,20 +93,20 @@ struct ResultView: View {
                 }
                 .listStyle(PlainListStyle())
             }
-            .alert(dataController.errorMessage, isPresented: $isShowErrorAlert) {
+            .alert(errorManager.errorMessage, isPresented: $isShowErrorAlert) {
                 Button("OK") {
-                    dataController.readAPIError = false
+                    errorManager.isShowingError = false
                     dataController.readFortune = false
                 }
             } message: {
-                Text(dataController.errorMessageDetail)
+                Text(errorManager.errorMessageDetail)
             }
             .onAppear {
-                if dataController.readAPIError {
+                if errorManager.isShowingError {
                     isShowErrorAlert = true
                 }
             }
-            .onChange(of: dataController.readAPIError) { isError in
+            .onChange(of: errorManager.isShowingError) { isError in
                 if isError {
                     isShowErrorAlert = true
                 }

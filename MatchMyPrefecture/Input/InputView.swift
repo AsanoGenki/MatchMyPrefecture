@@ -10,16 +10,16 @@ import Combine
 import CoreData
 
 struct InputView: View {
-    @EnvironmentObject var dataController: PrefectureMatchingController
+    @EnvironmentObject private var dataController: PrefectureMatchingController
     @State private var editting = false
     @State private var isShowingBirthdaySheet = false
     @State private var isShowingBloodTypeSheet = false
-    @FocusState var focus: Bool
-    @Environment(\.managedObjectContext) var viewContext
-    @EnvironmentObject var sePlayerManager: SEPlayerManager
+    @FocusState private var focus: Bool
+    @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var sePlayerManager: SEPlayerManager
     @Environment(\.dismiss) private var dismiss
     // ユーザーネームが記述されたときに"占う"ボタンが使えるようにする
-    var buttonEnable: Bool {
+    private var buttonEnable: Bool {
         if !dataController.userName.isEmpty {
             return true
         } else {
@@ -159,7 +159,7 @@ struct InputView: View {
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     // Date型のデータをString型にする
-    func dateToString(dateString: Date) -> String? {
+    private func dateToString(dateString: Date) -> String? {
         let formatter: DateFormatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .gregorian)
         formatter.dateFormat = "yyyy/MM/dd"

@@ -13,7 +13,8 @@ struct MatchMyPrefectureApp: App {
     @StateObject var sePlayerManager = SEPlayerManager.shared
     @StateObject var prefectureMatchingController = PrefectureMatchingController.shared
     @StateObject var networkMonitor = NetworkMonitor.shared
-    let persistenceController = PersistenceController()
+    @StateObject var errorManager = ErrorManager.shared
+    private let persistenceController = PersistenceController()
     var body: some Scene {
         WindowGroup {
             StartView()
@@ -25,6 +26,7 @@ struct MatchMyPrefectureApp: App {
                 .environmentObject(sePlayerManager)
                 .environmentObject(prefectureMatchingController)
                 .environmentObject(networkMonitor)
+                .environmentObject(errorManager)
         }
     }
 }

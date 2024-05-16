@@ -15,7 +15,9 @@ struct PrefectureBriefView: View {
             Text(brief)
                 .padding(.top, 20)
                 .lineSpacing(7)
-            Link("ウィキペディアでもっと詳しく読む", destination: wikiURL(prefecture: prefecture))
+            if let url = wikiURL(prefecture: prefecture) {
+                Link("ウィキペディアでもっと詳しく読む", destination: url)
+            }
             Spacer()
         }
         .font(.system(size: 18))
@@ -23,9 +25,9 @@ struct PrefectureBriefView: View {
         .padding(.horizontal)
     }
     // 日本語をリンクに含めると文字化けしてしまうため、エンコーディングを行う
-    func wikiURL(prefecture: String) -> URL {
+    private func wikiURL(prefecture: String) -> URL? {
         let urlString = "https://ja.wikipedia.org/wiki/\(prefecture)"
-        let encodeUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        return URL(string: encodeUrlString)!
+        let encodeUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        return URL(string: encodeUrlString)
     }
 }

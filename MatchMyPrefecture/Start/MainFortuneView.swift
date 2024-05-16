@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainFortuneView: View {
-    @EnvironmentObject var dataController: PrefectureMatchingController
+    @EnvironmentObject private var dataController: PrefectureMatchingController
     var body: some View {
         if dataController.readFortune {
             ResultView()

@@ -13,7 +13,7 @@ final class NetworkMonitor: ObservableObject {
     static let shared = NetworkMonitor()
     private let monitor: NWPathMonitor
     private let queue: DispatchQueue
-    init() {
+    private init() {
         self.monitor = NWPathMonitor()
         self.queue = DispatchQueue(label: "NetworkMonitor")
         self.isConnected = false

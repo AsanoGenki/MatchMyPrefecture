@@ -10,12 +10,15 @@ import CoreData
 
 struct RecordView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\FortuneResult.createDate, order: .reverse)])
-    var resultItems: FetchedResults<FortuneResult>
-    @Environment(\.managedObjectContext) var viewContext
+    private var resultItems: FetchedResults<FortuneResult>
+    @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var networkMonitor: NetworkMonitor
     @State private var isShowingNetworkError = false
     @State private var isShowingAllDeleteAlert = false
-    @State var sortOrder = "新しい順"
+    @State private var isShowingErrorAlert = false
+    @State private var errorMessage = ""
+    @State private var errorMessageDetail = ""
+    @State private var sortOrder = "新しい順"
     var body: some View {
         List {
             ForEach(resultItems, id: \.self) { item in
@@ -68,6 +71,10 @@ struct RecordView: View {
             }
         } message: {
             Text("この操作は取り消せません。本当に実行しますか？")
+        }
+        .alert(errorMessage, isPresented: $isShowingErrorAlert) {
+        } message: {
+            Text(errorMessageDetail)
         }
         .onAppear {
             if !networkMonitor.isConnected {
@@ -146,7 +153,9 @@ struct RecordView: View {
         do {
             try viewContext.save()
         } catch {
-            fatalError("セーブに失敗")
+            errorMessage = "エラー"
+            errorMessageDetail = "データの削除に失敗しました。もう一度お試しください。"
+            isShowingErrorAlert = true
         }
     }
     private func deleteAllItems() {
@@ -157,6 +166,9 @@ struct RecordView: View {
         do {
             try viewContext.save()
         } catch {
+            errorMessage = "エラー"
+            errorMessageDetail = "データの削除に失敗しました。もう一度お試しください。"
+            isShowingErrorAlert = true
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }

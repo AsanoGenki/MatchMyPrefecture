@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SettingView: View {
-    @EnvironmentObject var bgmPlayerManager: BGMPlayerManager
-    @AppStorage("BGM") var isPlayingBGM: Bool = true
-    @AppStorage("soundEffect") var isPlayingSE = true
+    @EnvironmentObject private var bgmPlayerManager: BGMPlayerManager
+    @AppStorage("BGM") private var isPlayingBGM: Bool = true
+    @AppStorage("soundEffect") private var isPlayingSE = true
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationView {

@@ -13,14 +13,12 @@ final class PrefectureMatchingController: ObservableObject {
     @Published var userName = ""
     @Published var birthDay = Date()
     @Published var bloodType = "A型"
+    @Published var bloodTypeReplace = "a"
     @Published var result: ResultData = ResultData()
-    @Published var readAPIError = false
     @Published var readFortune = false
-    @Published var errorMessage = ""
-    @Published var errorMessageDetail = ""
-    var bloodTypeReplace = "a"
-    let calendar = Calendar(identifier: .gregorian)
-    let now = Date()
+    let errorManager = ErrorManager.shared
+    private let calendar = Calendar(identifier: .gregorian)
+    private let now = Date()
     // 占い結果を取得するAPIの処理
     func readFortuneTelling(viewContext: NSManagedObjectContext) async {
         guard let url = URL(string: "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud/my_fortune") else {
@@ -51,29 +49,15 @@ final class PrefectureMatchingController: ObservableObject {
                 print("statusCode should be 2xx, but is \(response.statusCode)")
                 print("response = \(response)")
                 DispatchQueue.main.async {
-                    self.errorMessage = "HTTPエラー"
-                    self.errorMessageDetail = "サーバーエラーが発生しました。ステータスコード: \(response.statusCode)。"
-                    self.readAPIError = true
+                    self.errorManager.errorMessage = "HTTPエラー"
+                    self.errorManager.errorMessageDetail = "サーバーエラーが発生しました。ステータスコード: \(response.statusCode)。"
+                    self.errorManager.isShowingError = true
                 }
                 return
             }
             self.decodeData(data, viewContext: viewContext)
         }
         task.resume()
-    }
-    func addResultToCoreData(result: ResultData, viewContext: NSManagedObjectContext) {
-        let newItem = FortuneResult(context: viewContext)
-        newItem.userName = userName
-        newItem.birthday = birthDay
-        newItem.bloodType = bloodType
-        newItem.logoURL = result.logoUrl.absoluteString
-        newItem.prefecture = result.name
-        newItem.createDate = Date()
-        do {
-            try viewContext.save()
-        } catch {
-            fatalError("セーブに失敗")
-        }
     }
     // API関連の処理
     private func createURLRequest(url: URL) -> URLRequest {
@@ -112,9 +96,9 @@ final class PrefectureMatchingController: ObservableObject {
             self.addResultToCoreData(result: responseObject, viewContext: viewContext)
         } catch {
             DispatchQueue.main.async {
-                self.errorMessage = "デコードエラー"
-                self.errorMessageDetail = "サーバーからのデータの解析に失敗しました。もう一度お試しください。"
-                self.readAPIError = true
+                self.errorManager.errorMessage = "デコードエラー"
+                self.errorManager.errorMessageDetail = "サーバーからのデータの解析に失敗しました。もう一度お試しください。"
+                self.errorManager.isShowingError = true
             }
             print(error)
             if let responseString = String(data: data, encoding: .utf8) {
@@ -124,31 +108,50 @@ final class PrefectureMatchingController: ObservableObject {
             }
         }
     }
+    // 結果データをローカルに保存
+    private func addResultToCoreData(result: ResultData, viewContext: NSManagedObjectContext) {
+        let newItem = FortuneResult(context: viewContext)
+        newItem.userName = userName
+        newItem.birthday = birthDay
+        newItem.bloodType = bloodType
+        newItem.logoURL = result.logoUrl.absoluteString
+        newItem.prefecture = result.name
+        newItem.createDate = Date()
+        do {
+            try viewContext.save()
+        } catch {
+            DispatchQueue.main.async {
+                self.errorManager.errorMessage = "セーブエラー"
+                self.errorManager.errorMessageDetail = "占い結果の保存に失敗しました。もう一度お試しください。"
+                self.errorManager.isShowingError = true
+            }
+        }
+    }
     // APIのエラー関連の処理
     private func handleURLError() {
         DispatchQueue.main.async {
-            self.errorMessage = "URLエラー"
-            self.errorMessageDetail = "有効なURLが見つかりません。もう一度お試しください。"
-            self.readAPIError = true
+            self.errorManager.errorMessage = "URLエラー"
+            self.errorManager.errorMessageDetail = "有効なURLが見つかりません。もう一度お試しください。"
+            self.errorManager.isShowingError = true
         }
     }
     private func handleJsonError() {
-        self.errorMessage = "エラー"
-        self.errorMessageDetail = "JSONのシリアル化に失敗しました。"
-        self.readAPIError = true
+        self.errorManager.errorMessage = "エラー"
+        self.errorManager.errorMessageDetail = "JSONのシリアル化に失敗しました。"
+        self.errorManager.isShowingError = true
     }
     private func handleNetworkError() {
         DispatchQueue.main.async {
-            self.errorMessage = "ネットワークエラー"
-            self.errorMessageDetail = "インターネットに接続してもう一度お試しください。"
-            self.readAPIError = true
+            self.errorManager.errorMessage = "ネットワークエラー"
+            self.errorManager.errorMessageDetail = "インターネットに接続してもう一度お試しください。"
+            self.errorManager.isShowingError = true
         }
     }
     private func handleServerError() {
         DispatchQueue.main.async {
-            self.errorMessage = "サーバーエラー"
-            self.errorMessageDetail = "サーバーからの応答が不正です。もう一度お試しください。"
-            self.readAPIError = true
+            self.errorManager.errorMessage = "サーバーエラー"
+            self.errorManager.errorMessageDetail = "サーバーからの応答が不正です。もう一度お試しください。"
+            self.errorManager.isShowingError = true
         }
     }
 }

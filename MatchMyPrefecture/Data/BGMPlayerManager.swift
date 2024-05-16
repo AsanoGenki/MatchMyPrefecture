@@ -13,9 +13,13 @@ import SwiftUI
 final class BGMPlayerManager: ObservableObject {
     static let shared = BGMPlayerManager()
     private var audioPlayer: AVAudioPlayer?
+    @Published var errorMessage = ""
+    @Published var errorMessageDetail = ""
+    @Published var isShowingBGMError = false
+    let errorManager = ErrorManager.shared
     // BGMのオンオフをAppStorageに保存
     @AppStorage("BGM") var isPlayingBGM: Bool = true
-    init() {
+    private init() {
         configureAudioPlayer()
     }
     private func configureAudioPlayer() {
@@ -24,15 +28,21 @@ final class BGMPlayerManager: ObservableObject {
                 do {
                     audioPlayer = try AVAudioPlayer(data: bgmData)
                 } catch {
-                    print("Error initializing AVAudioPlayer: \(error)")
+                    readErrorMessage()
                 }
             } else {
-                print("Error loading audio data.")
+                readErrorMessage()
             }
             audioPlayer?.volume = 0.07
             audioPlayer?.numberOfLoops = -1 // 無限ループ
             audioPlayer?.play()
         }
+    }
+    // エラー発生時の処理
+    private func readErrorMessage() {
+        errorManager.errorMessage = "BGMの読み込みに失敗しました。"
+        errorManager.errorMessageDetail = "BGMを再生したい場合、再起動をしてください。"
+        errorManager.isShowingError = true
     }
     // BGM再生
     func playBGM() {

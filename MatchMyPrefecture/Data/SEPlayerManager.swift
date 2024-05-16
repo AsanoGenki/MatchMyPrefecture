@@ -13,23 +13,33 @@ final class SEPlayerManager: ObservableObject {
     private var clickNomalSound: AVAudioPlayer?
     private var clickSmallSound: AVAudioPlayer?
     @AppStorage("soundEffect") var isPlayingSE = true
-    init() {
+    @Published var errorMessage = ""
+    @Published var errorMessageDetail = ""
+    @Published var isShowingSEError = false
+    let errorManager = ErrorManager.shared
+    private init() {
         do {
             if let clickNomalData = NSDataAsset(name: "SE_click_normal")?.data {
                 clickNomalSound = try AVAudioPlayer(data: clickNomalData)
                 clickNomalSound?.volume = 0.7
             } else {
-                print("Error loading SE_click_normal data.")
+                readErrorMessage()
             }
             if let clickSmallData = NSDataAsset(name: "SE_click_small")?.data {
                 clickSmallSound = try AVAudioPlayer(data: clickSmallData)
                 clickSmallSound?.volume = 0.7
             } else {
-                print("Error loading SE_click_small data.")
+                readErrorMessage()
             }
         } catch {
-            print("Error initializing AVAudioPlayer: \(error)")
+            readErrorMessage()
         }
+    }
+    // エラー発生時の処理
+    private func readErrorMessage() {
+        errorManager.errorMessage = "効果音の読み込みに失敗しました。"
+        errorManager.errorMessageDetail = "効果音を再生したい場合、再起動をしてください。"
+        errorManager.isShowingError = true
     }
     func playClickNormal() {
         guard isPlayingSE else {

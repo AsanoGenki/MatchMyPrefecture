@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ResultData: Codable {
-    struct MonthDay: Codable {
+struct ResultData: Decodable {
+    struct MonthDay: Decodable {
         var month: Int
         var day: Int
     }

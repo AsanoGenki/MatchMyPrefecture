@@ -11,10 +11,13 @@ struct StartView: View {
     @State private var isShowingRecordView = false
     @State private var isShowingSettingView = false
     @State private var isShowingMainFortune = false
+    @State private var isShowingErrorAlert = false
     @Environment(\.scenePhase) private var scenePhase
-    @EnvironmentObject var bgmPlayerManager: BGMPlayerManager
-    @EnvironmentObject var sePlayerManager: SEPlayerManager
-    @AppStorage("BGM") var isPlayingBGM: Bool = true
+    @EnvironmentObject private var bgmPlayerManager: BGMPlayerManager
+    @EnvironmentObject private var sePlayerManager: SEPlayerManager
+    @EnvironmentObject private var errorManager: ErrorManager
+    @EnvironmentObject private var dataController: PrefectureMatchingController
+    @AppStorage("BGM") private var isPlayingBGM: Bool = true
     var body: some View {
         NavigationStack {
             ZStack {
@@ -77,6 +80,13 @@ struct StartView: View {
                 }
             }
         }
+        .alert(errorManager.errorMessage, isPresented: $isShowingErrorAlert) {
+            Button("OK") {
+                errorManager.isShowingError = false
+            }
+        } message: {
+            Text(errorManager.errorMessageDetail)
+        }
         .onChange(of: scenePhase) { phase in
             switch phase {
             case .active:
@@ -90,9 +100,23 @@ struct StartView: View {
             @unknown default: break
             }
         }
-        .fullScreenCover(isPresented: $isShowingMainFortune) {
-            MainFortuneView()
+        .onAppear {
+            if errorManager.isShowingError {
+                isShowingErrorAlert = true
+            }
         }
+        .onChange(of: errorManager.isShowingError) { isError in
+            if isError {
+                isShowingErrorAlert = true
+            }
+        }
+        .fullScreenCover(
+            isPresented: $isShowingMainFortune,
+            onDismiss: {
+                dataController.readFortune = false
+            }) {
+                MainFortuneView()
+            }
     }
 }
 
