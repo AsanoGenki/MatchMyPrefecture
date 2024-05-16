@@ -27,7 +27,7 @@ struct BirthdaySheet: View {
                     .font(.system(size: 18))
                     .fontWeight(.semibold)
             )
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
