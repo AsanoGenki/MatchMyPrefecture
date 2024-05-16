@@ -22,37 +22,48 @@ final class PrefectureMatchingController: ObservableObject {
     // 占い結果を取得するAPIの処理
     func readFortuneTelling(viewContext: NSManagedObjectContext) async {
         guard let url = URL(string: "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud/my_fortune") else {
-            handleURLError()
+            self.handleError(
+                message: "URLエラー",
+                detail: "有効なURLが見つかりません。もう一度お試しください。"
+            )
             return
         }
         var request = createURLRequest(url: url)
         let users = createUsersDictionary()
         // 受け取ったデータの入力(ユーザーネーム、誕生日、血液型等)
         guard let httpBody = try? JSONSerialization.data(withJSONObject: users) else {
-            self.handleJsonError()
+            self.handleError(
+                message: "エラー",
+                detail: "JSONのシリアル化に失敗しました。もう一度お試しください。"
+            )
             return
         }
         request.httpBody = httpBody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
-                self.handleNetworkError()
+                self.handleError(
+                    message: "ネットワークエラー",
+                    detail: "インターネットに接続してもう一度お試しください。"
+                )
                 return
             }
             guard let data = data,
                   let response = response as? HTTPURLResponse
             else {
                 print("error", error ?? URLError(.badServerResponse))
-                self.handleServerError()
+                self.handleError(
+                    message: "サーバーエラー",
+                    detail: "サーバーからの応答が不正です。もう一度お試しください。"
+                )
                 return
             }
             guard (200...299) ~= response.statusCode else {
                 print("statusCode should be 2xx, but is \(response.statusCode)")
                 print("response = \(response)")
-                DispatchQueue.main.async {
-                    self.errorManager.errorMessage = "HTTPエラー"
-                    self.errorManager.errorMessageDetail = "サーバーエラーが発生しました。ステータスコード: \(response.statusCode)。"
-                    self.errorManager.isShowingError = true
-                }
+                self.handleError(
+                    message: "HTTPエラー",
+                    detail: "サーバーエラーが発生しました。ステータスコード: \(response.statusCode)。"
+                )
                 return
             }
             self.decodeData(data, viewContext: viewContext)
@@ -95,12 +106,10 @@ final class PrefectureMatchingController: ObservableObject {
             }
             self.addResultToCoreData(result: responseObject, viewContext: viewContext)
         } catch {
-            DispatchQueue.main.async {
-                self.errorManager.errorMessage = "デコードエラー"
-                self.errorManager.errorMessageDetail = "サーバーからのデータの解析に失敗しました。もう一度お試しください。"
-                self.errorManager.isShowingError = true
-            }
-            print(error)
+            self.handleError(
+                message: "デコードエラー",
+                detail: "サーバーからのデータの解析に失敗しました。もう一度お試しください。"
+            )
             if let responseString = String(data: data, encoding: .utf8) {
                 print("responseString = \(responseString)")
             } else {
@@ -120,37 +129,14 @@ final class PrefectureMatchingController: ObservableObject {
         do {
             try viewContext.save()
         } catch {
-            DispatchQueue.main.async {
-                self.errorManager.errorMessage = "セーブエラー"
-                self.errorManager.errorMessageDetail = "占い結果の保存に失敗しました。もう一度お試しください。"
-                self.errorManager.isShowingError = true
-            }
+            handleError(message: "セーブエラー", detail: "占い結果の保存に失敗しました。もう一度お試しください。")
         }
     }
     // APIのエラー関連の処理
-    private func handleURLError() {
+    private func handleError(message: String, detail: String) {
         DispatchQueue.main.async {
-            self.errorManager.errorMessage = "URLエラー"
-            self.errorManager.errorMessageDetail = "有効なURLが見つかりません。もう一度お試しください。"
-            self.errorManager.isShowingError = true
-        }
-    }
-    private func handleJsonError() {
-        self.errorManager.errorMessage = "エラー"
-        self.errorManager.errorMessageDetail = "JSONのシリアル化に失敗しました。"
-        self.errorManager.isShowingError = true
-    }
-    private func handleNetworkError() {
-        DispatchQueue.main.async {
-            self.errorManager.errorMessage = "ネットワークエラー"
-            self.errorManager.errorMessageDetail = "インターネットに接続してもう一度お試しください。"
-            self.errorManager.isShowingError = true
-        }
-    }
-    private func handleServerError() {
-        DispatchQueue.main.async {
-            self.errorManager.errorMessage = "サーバーエラー"
-            self.errorManager.errorMessageDetail = "サーバーからの応答が不正です。もう一度お試しください。"
+            self.errorManager.errorMessage = message
+            self.errorManager.errorMessageDetail = detail
             self.errorManager.isShowingError = true
         }
     }

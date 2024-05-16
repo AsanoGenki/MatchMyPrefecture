@@ -17,7 +17,6 @@ final class NetworkMonitor: ObservableObject {
         self.monitor = NWPathMonitor()
         self.queue = DispatchQueue(label: "NetworkMonitor")
         self.isConnected = false
-
         self.monitor.pathUpdateHandler = { path in
             DispatchQueue.main.async {
                 self.isConnected = path.status == .satisfied
