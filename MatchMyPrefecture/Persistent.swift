@@ -14,9 +14,10 @@ class PersistenceController {
         container = NSPersistentContainer(name: "MatchMyPrefecture")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if (error as NSError?) != nil {
-                self.errorManager.errorMessage = "データの読み込みに失敗しました。"
-                self.errorManager.errorMessageDetail = "アプリを再起動して、もう一度お試しください。"
-                self.errorManager.isShowingError = true
+                self.errorManager.readErrorMessage(
+                    message: "データの読み込みに失敗しました。",
+                    detail: "アプリを再起動して、もう一度お試しください。"
+                )
             }
         })
     }

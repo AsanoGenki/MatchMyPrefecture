@@ -22,7 +22,7 @@ final class PrefectureMatchingController: ObservableObject {
     // 占い結果を取得するAPIの処理
     func readFortuneTelling(viewContext: NSManagedObjectContext) async {
         guard let url = URL(string: "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud/my_fortune") else {
-            self.handleError(
+            self.errorManager.readErrorMessage(
                 message: "URLエラー",
                 detail: "有効なURLが見つかりません。もう一度お試しください。"
             )
@@ -32,7 +32,7 @@ final class PrefectureMatchingController: ObservableObject {
         let users = createUsersDictionary()
         // 受け取ったデータの入力(ユーザーネーム、誕生日、血液型等)
         guard let httpBody = try? JSONSerialization.data(withJSONObject: users) else {
-            self.handleError(
+            self.errorManager.readErrorMessage(
                 message: "エラー",
                 detail: "JSONのシリアル化に失敗しました。もう一度お試しください。"
             )
@@ -41,7 +41,7 @@ final class PrefectureMatchingController: ObservableObject {
         request.httpBody = httpBody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
-                self.handleError(
+                self.errorManager.readErrorMessage(
                     message: "ネットワークエラー",
                     detail: "インターネットに接続してもう一度お試しください。"
                 )
@@ -51,7 +51,7 @@ final class PrefectureMatchingController: ObservableObject {
                   let response = response as? HTTPURLResponse
             else {
                 print("error", error ?? URLError(.badServerResponse))
-                self.handleError(
+                self.errorManager.readErrorMessage(
                     message: "サーバーエラー",
                     detail: "サーバーからの応答が不正です。もう一度お試しください。"
                 )
@@ -60,7 +60,7 @@ final class PrefectureMatchingController: ObservableObject {
             guard (200...299) ~= response.statusCode else {
                 print("statusCode should be 2xx, but is \(response.statusCode)")
                 print("response = \(response)")
-                self.handleError(
+                self.errorManager.readErrorMessage(
                     message: "HTTPエラー",
                     detail: "サーバーエラーが発生しました。ステータスコード: \(response.statusCode)。"
                 )
@@ -106,7 +106,7 @@ final class PrefectureMatchingController: ObservableObject {
             }
             self.addResultToCoreData(result: responseObject, viewContext: viewContext)
         } catch {
-            self.handleError(
+            self.errorManager.readErrorMessage(
                 message: "デコードエラー",
                 detail: "サーバーからのデータの解析に失敗しました。もう一度お試しください。"
             )
@@ -129,15 +129,10 @@ final class PrefectureMatchingController: ObservableObject {
         do {
             try viewContext.save()
         } catch {
-            handleError(message: "セーブエラー", detail: "占い結果の保存に失敗しました。もう一度お試しください。")
-        }
-    }
-    // APIのエラー関連の処理
-    private func handleError(message: String, detail: String) {
-        DispatchQueue.main.async {
-            self.errorManager.errorMessage = message
-            self.errorManager.errorMessageDetail = detail
-            self.errorManager.isShowingError = true
+            self.errorManager.readErrorMessage(
+                message: "セーブエラー",
+                detail: "占い結果の保存に失敗しました。もう一度お試しください。"
+            )
         }
     }
 }

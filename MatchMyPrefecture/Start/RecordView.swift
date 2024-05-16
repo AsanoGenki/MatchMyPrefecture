@@ -13,11 +13,10 @@ struct RecordView: View {
     private var resultItems: FetchedResults<FortuneResult>
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var networkMonitor: NetworkMonitor
+    @EnvironmentObject private var errorManager: ErrorManager
     @State private var isShowingNetworkError = false
     @State private var isShowingAllDeleteAlert = false
     @State private var isShowingErrorAlert = false
-    @State private var errorMessage = ""
-    @State private var errorMessageDetail = ""
     @State private var sortOrder = "新しい順"
     var body: some View {
         List {
@@ -58,6 +57,16 @@ struct RecordView: View {
             }
             .onDelete(perform: removeFortuneCoreData)
         }
+        .onAppear {
+            if errorManager.isShowingError {
+                isShowingErrorAlert = true
+            }
+        }
+        .onChange(of: errorManager.isShowingError) { isError in
+            if isError {
+                isShowingErrorAlert = true
+            }
+        }
         .navigationBarTitle("", displayMode: .inline)
         .listStyle(.plain)
         .alert("ネットワークエラー", isPresented: $isShowingNetworkError) {
@@ -72,9 +81,9 @@ struct RecordView: View {
         } message: {
             Text("この操作は取り消せません。本当に実行しますか？")
         }
-        .alert(errorMessage, isPresented: $isShowingErrorAlert) {
+        .alert(errorManager.errorMessage, isPresented: $isShowingErrorAlert) {
         } message: {
-            Text(errorMessageDetail)
+            Text(errorManager.errorMessageDetail)
         }
         .onAppear {
             if !networkMonitor.isConnected {
@@ -153,9 +162,10 @@ struct RecordView: View {
         do {
             try viewContext.save()
         } catch {
-            errorMessage = "エラー"
-            errorMessageDetail = "データの削除に失敗しました。もう一度お試しください。"
-            isShowingErrorAlert = true
+            errorManager.readErrorMessage(
+                message: "エラー",
+                detail: "データの削除に失敗しました。もう一度お試しください。"
+            )
         }
     }
     private func deleteAllItems() {
@@ -166,9 +176,10 @@ struct RecordView: View {
         do {
             try viewContext.save()
         } catch {
-            errorMessage = "エラー"
-            errorMessageDetail = "データの削除に失敗しました。もう一度お試しください。"
-            isShowingErrorAlert = true
+            errorManager.readErrorMessage(
+                message: "エラー",
+                detail: "データの削除に失敗しました。もう一度お試しください。"
+            )
         }
     }
 }

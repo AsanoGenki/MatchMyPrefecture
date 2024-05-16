@@ -7,9 +7,15 @@
 
 import Foundation
 
-class ErrorManager: ObservableObject {
+final class ErrorManager: ObservableObject {
     static let shared = ErrorManager()
     @Published var errorMessage = ""
     @Published var errorMessageDetail = ""
     @Published var isShowingError = false
+    private init() {}
+    func readErrorMessage(message: String, detail: String) {
+        errorMessage = message
+        errorMessageDetail = detail
+        isShowingError = true
+    }
 }

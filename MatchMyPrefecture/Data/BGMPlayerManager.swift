@@ -20,26 +20,26 @@ final class BGMPlayerManager: ObservableObject {
         configureAudioPlayer()
     }
     private func configureAudioPlayer() {
-        if isPlayingBGM {
-            if let bgmData = NSDataAsset(name: "BGM_Sweet_Peach")?.data {
-                do {
-                    audioPlayer = try AVAudioPlayer(data: bgmData)
-                } catch {
-                    readErrorMessage()
+        if let bgmData = NSDataAsset(name: "BGM_Sweet_Peach")?.data {
+            do {
+                audioPlayer = try AVAudioPlayer(data: bgmData)
+                audioPlayer?.volume = 0.07
+                audioPlayer?.numberOfLoops = -1 // 無限ループ
+                if isPlayingBGM {
+                    audioPlayer?.play()
                 }
-            } else {
-                readErrorMessage()
+            } catch {
+                errorManager.readErrorMessage(
+                    message: "BGMの読み込みに失敗しました。",
+                    detail: "BGMを再生したい場合、再起動をしてください。"
+                )
             }
-            audioPlayer?.volume = 0.07
-            audioPlayer?.numberOfLoops = -1 // 無限ループ
-            audioPlayer?.play()
+        } else {
+            errorManager.readErrorMessage(
+                message: "BGMの読み込みに失敗しました。",
+                detail: "BGMを再生したい場合、再起動をしてください。"
+            )
         }
-    }
-    // エラー発生時の処理
-    private func readErrorMessage() {
-        errorManager.errorMessage = "BGMの読み込みに失敗しました。"
-        errorManager.errorMessageDetail = "BGMを再生したい場合、再起動をしてください。"
-        errorManager.isShowingError = true
     }
     // BGM再生
     func playBGM() {
