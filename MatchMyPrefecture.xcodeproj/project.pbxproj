@@ -7,20 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A1BEC982BF5B55C006A9356 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1BEC972BF5B55C006A9356 /* ErrorManager.swift */; };
+		4A1DB2382BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DB2362BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld */; };
+		4A1DB23A2BF0B4B800396724 /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DB2392BF0B4B800396724 /* Persistent.swift */; };
+		4A1DB23C2BF0B81400396724 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DB23B2BF0B81400396724 /* RecordView.swift */; };
+		4A742AF22BF100F000DB67BF /* BGMPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A742AF12BF100F000DB67BF /* BGMPlayerManager.swift */; };
+		4A742AF42BF1044B00DB67BF /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A742AF32BF1044B00DB67BF /* SettingView.swift */; };
+		4A742AF62BF1059F00DB67BF /* SEPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A742AF52BF1059F00DB67BF /* SEPlayerManager.swift */; };
 		4A98D96C2BF07DB800C46D94 /* MatchMyPrefectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */; };
 		4A98D96E2BF07DB800C46D94 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98D96D2BF07DB800C46D94 /* StartView.swift */; };
 		4A98D9702BF07DBA00C46D94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A98D96F2BF07DBA00C46D94 /* Assets.xcassets */; };
 		4A98D9732BF07DBA00C46D94 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A98D9722BF07DBA00C46D94 /* Preview Assets.xcassets */; };
+		4AA52F792BF308CB0013915B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F782BF308CB0013915B /* NetworkMonitor.swift */; };
+		4AA52F7B2BF31A280013915B /* MainFortuneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F7A2BF31A280013915B /* MainFortuneView.swift */; };
 		4AA6062A2BF0898D004B2C31 /* ButtonUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606292BF0898D004B2C31 /* ButtonUIView.swift */; };
+		4AA6062C2BF08C74004B2C31 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6062B2BF08C74004B2C31 /* InputView.swift */; };
+		4AA6062E2BF08DC1004B2C31 /* BirthdaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6062D2BF08DC1004B2C31 /* BirthdaySheet.swift */; };
+		4AA606302BF08DD6004B2C31 /* BloodTypeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6062F2BF08DD6004B2C31 /* BloodTypeSheet.swift */; };
+		4AA606332BF093E4004B2C31 /* PrefectureMatchingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */; };
+		4AA606352BF099B4004B2C31 /* ResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606342BF099B4004B2C31 /* ResultData.swift */; };
+		4AA606372BF09B4C004B2C31 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606362BF09B4C004B2C31 /* ResultView.swift */; };
+		4AA6063B2BF0A4F2004B2C31 /* PrefectureBriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6063A2BF0A4F2004B2C31 /* PrefectureBriefView.swift */; };
+		893F04E229A1CF493D9B3513 /* Pods_MatchMyPrefecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E792075DAB6B70D2E13D3E /* Pods_MatchMyPrefecture.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33E792075DAB6B70D2E13D3E /* Pods_MatchMyPrefecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatchMyPrefecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A1BEC972BF5B55C006A9356 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
+		4A1DB2372BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatchMyPrefecture.xcdatamodel; sourceTree = "<group>"; };
+		4A1DB2392BF0B4B800396724 /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
+		4A1DB23B2BF0B81400396724 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		4A742AF12BF100F000DB67BF /* BGMPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGMPlayerManager.swift; sourceTree = "<group>"; };
+		4A742AF32BF1044B00DB67BF /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		4A742AF52BF1059F00DB67BF /* SEPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEPlayerManager.swift; sourceTree = "<group>"; };
+		4A742AF72BF1080700DB67BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A98D9682BF07DB800C46D94 /* MatchMyPrefecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchMyPrefecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMyPrefectureApp.swift; sourceTree = "<group>"; };
 		4A98D96D2BF07DB800C46D94 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		4A98D96F2BF07DBA00C46D94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A98D9722BF07DBA00C46D94 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4AA52F782BF308CB0013915B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		4AA52F7A2BF31A280013915B /* MainFortuneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFortuneView.swift; sourceTree = "<group>"; };
 		4AA606292BF0898D004B2C31 /* ButtonUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonUIView.swift; sourceTree = "<group>"; };
+		4AA6062B2BF08C74004B2C31 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		4AA6062D2BF08DC1004B2C31 /* BirthdaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySheet.swift; sourceTree = "<group>"; };
+		4AA6062F2BF08DD6004B2C31 /* BloodTypeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodTypeSheet.swift; sourceTree = "<group>"; };
+		4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefectureMatchingController.swift; sourceTree = "<group>"; };
+		4AA606342BF099B4004B2C31 /* ResultData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultData.swift; sourceTree = "<group>"; };
+		4AA606362BF09B4C004B2C31 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		4AA6063A2BF0A4F2004B2C31 /* PrefectureBriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefectureBriefView.swift; sourceTree = "<group>"; };
+		7F4A55DE5F9DDDA5AECC4F58 /* Pods-MatchMyPrefecture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchMyPrefecture.debug.xcconfig"; path = "Target Support Files/Pods-MatchMyPrefecture/Pods-MatchMyPrefecture.debug.xcconfig"; sourceTree = "<group>"; };
+		D47D438DE72B66A55028F28F /* Pods-MatchMyPrefecture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchMyPrefecture.release.xcconfig"; path = "Target Support Files/Pods-MatchMyPrefecture/Pods-MatchMyPrefecture.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				893F04E229A1CF493D9B3513 /* Pods_MatchMyPrefecture.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +77,8 @@
 			children = (
 				4A98D96A2BF07DB800C46D94 /* MatchMyPrefecture */,
 				4A98D9692BF07DB800C46D94 /* Products */,
+				BCA86420E0C66D0D6DE320A5 /* Pods */,
+				F02004D534F0D710AB8462EB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,8 +93,14 @@
 		4A98D96A2BF07DB800C46D94 /* MatchMyPrefecture */ = {
 			isa = PBXGroup;
 			children = (
+				4A742AF72BF1080700DB67BF /* Info.plist */,
+				4A1DB2362BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld */,
 				4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */,
-				4A98D96D2BF07DB800C46D94 /* StartView.swift */,
+				4A1DB2392BF0B4B800396724 /* Persistent.swift */,
+				4AA6063F2BF0AB33004B2C31 /* Start */,
+				4AA606312BF09256004B2C31 /* Input */,
+				4AA6063D2BF0AB22004B2C31 /* Result */,
+				4AA6063E2BF0AB2C004B2C31 /* Data */,
 				4AA606292BF0898D004B2C31 /* ButtonUIView.swift */,
 				4A98D96F2BF07DBA00C46D94 /* Assets.xcassets */,
 				4A98D9712BF07DBA00C46D94 /* Preview Content */,
@@ -70,6 +116,66 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		4AA606312BF09256004B2C31 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				4AA6062B2BF08C74004B2C31 /* InputView.swift */,
+				4AA6062D2BF08DC1004B2C31 /* BirthdaySheet.swift */,
+				4AA6062F2BF08DD6004B2C31 /* BloodTypeSheet.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		4AA6063D2BF0AB22004B2C31 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				4AA606362BF09B4C004B2C31 /* ResultView.swift */,
+				4AA6063A2BF0A4F2004B2C31 /* PrefectureBriefView.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		4AA6063E2BF0AB2C004B2C31 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4AA606342BF099B4004B2C31 /* ResultData.swift */,
+				4AA606322BF093E4004B2C31 /* PrefectureMatchingController.swift */,
+				4A742AF12BF100F000DB67BF /* BGMPlayerManager.swift */,
+				4A742AF52BF1059F00DB67BF /* SEPlayerManager.swift */,
+				4A1BEC972BF5B55C006A9356 /* ErrorManager.swift */,
+				4AA52F782BF308CB0013915B /* NetworkMonitor.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4AA6063F2BF0AB33004B2C31 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				4A98D96D2BF07DB800C46D94 /* StartView.swift */,
+				4A1DB23B2BF0B81400396724 /* RecordView.swift */,
+				4A742AF32BF1044B00DB67BF /* SettingView.swift */,
+				4AA52F7A2BF31A280013915B /* MainFortuneView.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		BCA86420E0C66D0D6DE320A5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7F4A55DE5F9DDDA5AECC4F58 /* Pods-MatchMyPrefecture.debug.xcconfig */,
+				D47D438DE72B66A55028F28F /* Pods-MatchMyPrefecture.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F02004D534F0D710AB8462EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33E792075DAB6B70D2E13D3E /* Pods_MatchMyPrefecture.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +183,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A98D9762BF07DBA00C46D94 /* Build configuration list for PBXNativeTarget "MatchMyPrefecture" */;
 			buildPhases = (
+				D35A830EF9F496D36FD79E80 /* [CP] Check Pods Manifest.lock */,
 				4A98D9642BF07DB800C46D94 /* Sources */,
 				4A98D9652BF07DB800C46D94 /* Frameworks */,
 				4A98D9662BF07DB800C46D94 /* Resources */,
+				4A1BEC962BF5A3CE006A9356 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -135,14 +243,73 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4A1BEC962BF5A3CE006A9356 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
+		D35A830EF9F496D36FD79E80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MatchMyPrefecture-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4A98D9642BF07DB800C46D94 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A742AF62BF1059F00DB67BF /* SEPlayerManager.swift in Sources */,
+				4A1DB23A2BF0B4B800396724 /* Persistent.swift in Sources */,
+				4AA606332BF093E4004B2C31 /* PrefectureMatchingController.swift in Sources */,
+				4AA52F7B2BF31A280013915B /* MainFortuneView.swift in Sources */,
 				4AA6062A2BF0898D004B2C31 /* ButtonUIView.swift in Sources */,
+				4A1DB2382BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld in Sources */,
+				4AA606372BF09B4C004B2C31 /* ResultView.swift in Sources */,
+				4AA6062C2BF08C74004B2C31 /* InputView.swift in Sources */,
+				4A742AF42BF1044B00DB67BF /* SettingView.swift in Sources */,
+				4AA52F792BF308CB0013915B /* NetworkMonitor.swift in Sources */,
+				4AA606302BF08DD6004B2C31 /* BloodTypeSheet.swift in Sources */,
+				4A1DB23C2BF0B81400396724 /* RecordView.swift in Sources */,
+				4A1BEC982BF5B55C006A9356 /* ErrorManager.swift in Sources */,
+				4AA606352BF099B4004B2C31 /* ResultData.swift in Sources */,
+				4AA6063B2BF0A4F2004B2C31 /* PrefectureBriefView.swift in Sources */,
 				4A98D96E2BF07DB800C46D94 /* StartView.swift in Sources */,
+				4A742AF22BF100F000DB67BF /* BGMPlayerManager.swift in Sources */,
 				4A98D96C2BF07DB800C46D94 /* MatchMyPrefectureApp.swift in Sources */,
+				4AA6062E2BF08DC1004B2C31 /* BirthdaySheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +368,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -258,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -270,6 +437,7 @@
 		};
 		4A98D9772BF07DBA00C46D94 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4A55DE5F9DDDA5AECC4F58 /* Pods-MatchMyPrefecture.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -278,12 +446,18 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MatchMyPrefecture/Preview Content\"";
 				DEVELOPMENT_TEAM = 4J8L2WD7VW;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MatchMyPrefecture/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "都道府県占い";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -291,6 +465,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.asanogenki.MatchMyPrefecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -299,6 +477,7 @@
 		};
 		4A98D9782BF07DBA00C46D94 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D47D438DE72B66A55028F28F /* Pods-MatchMyPrefecture.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -307,12 +486,18 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MatchMyPrefecture/Preview Content\"";
 				DEVELOPMENT_TEAM = 4J8L2WD7VW;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MatchMyPrefecture/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "都道府県占い";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,6 +505,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.asanogenki.MatchMyPrefecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -348,6 +537,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4A1DB2362BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4A1DB2372BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodel */,
+			);
+			currentVersion = 4A1DB2372BF0B3CA00396724 /* MatchMyPrefecture.xcdatamodel */;
+			name = MatchMyPrefecture.xcdatamodeld;
+			path = /Users/asanogenki/Desktop/Apps/MatchMyPrefecture/MatchMyPrefecture/MatchMyPrefecture.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A98D9602BF07DB700C46D94 /* Project object */;
 }
