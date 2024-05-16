@@ -13,10 +13,7 @@ import SwiftUI
 final class BGMPlayerManager: ObservableObject {
     static let shared = BGMPlayerManager()
     private var audioPlayer: AVAudioPlayer?
-    @Published var errorMessage = ""
-    @Published var errorMessageDetail = ""
-    @Published var isShowingBGMError = false
-    let errorManager = ErrorManager.shared
+    private let errorManager = ErrorManager.shared
     // BGMのオンオフをAppStorageに保存
     @AppStorage("BGM") var isPlayingBGM: Bool = true
     private init() {

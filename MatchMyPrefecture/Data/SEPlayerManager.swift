@@ -13,10 +13,7 @@ final class SEPlayerManager: ObservableObject {
     private var clickNomalSound: AVAudioPlayer?
     private var clickSmallSound: AVAudioPlayer?
     @AppStorage("soundEffect") var isPlayingSE = true
-    @Published var errorMessage = ""
-    @Published var errorMessageDetail = ""
-    @Published var isShowingSEError = false
-    let errorManager = ErrorManager.shared
+    private let errorManager = ErrorManager.shared
     private init() {
         do {
             if let clickNomalData = NSDataAsset(name: "SE_click_normal")?.data {

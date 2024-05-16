@@ -169,8 +169,6 @@ struct RecordView: View {
             errorMessage = "エラー"
             errorMessageDetail = "データの削除に失敗しました。もう一度お試しください。"
             isShowingErrorAlert = true
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 }

@@ -16,7 +16,7 @@ final class PrefectureMatchingController: ObservableObject {
     @Published var bloodTypeReplace = "a"
     @Published var result: ResultData = ResultData()
     @Published var readFortune = false
-    let errorManager = ErrorManager.shared
+    private let errorManager = ErrorManager.shared
     private let calendar = Calendar(identifier: .gregorian)
     private let now = Date()
     // 占い結果を取得するAPIの処理
