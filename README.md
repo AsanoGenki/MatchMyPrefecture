@@ -52,6 +52,13 @@
 <img src="https://github.com/AsanoGenki/MatchMyPrefecture/assets/82352989/b900ecae-3470-4223-93eb-1d99be76f6de" width="40%">
 
 ---
+
+**iPadにも対応**
+|スタート画面|入力画面|
+|:-:|:-:|
+|<img src="https://github.com/AsanoGenki/MatchMyPrefecture/assets/82352989/d977ee82-5e04-42a5-86f4-39df72673111" width="80%">|<img src="https://github.com/AsanoGenki/MatchMyPrefecture/assets/82352989/899247a9-353c-4b33-8842-2730093c4975" width="80%">|
+---
+
 **サウンドの追加**　
 
 ・ BGM : [Sweet Peach](https://dova-s.jp/bgm/play19505.html)  
