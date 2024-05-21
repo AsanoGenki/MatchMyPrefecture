@@ -11,7 +11,7 @@ class PersistenceController {
     let container: NSPersistentContainer
     private let errorManager = ErrorManager.shared
     init() {
-        container = NSPersistentContainer(name: "MatchMyPrefecture")
+        container = NSPersistentContainer(name: "MatchMyPrefectureData")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if (error as NSError?) != nil {
                 self.errorManager.readErrorMessage(

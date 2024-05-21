@@ -27,7 +27,7 @@
 		4AA606352BF099B4004B2C31 /* ResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606342BF099B4004B2C31 /* ResultData.swift */; };
 		4AA606372BF09B4C004B2C31 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA606362BF09B4C004B2C31 /* ResultView.swift */; };
 		4AA6063B2BF0A4F2004B2C31 /* PrefectureBriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA6063A2BF0A4F2004B2C31 /* PrefectureBriefView.swift */; };
-		4AF52F112BFC8BF9007DFD40 /* MatchMyPrefecture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AF52F0F2BFC8BF9007DFD40 /* MatchMyPrefecture.xcdatamodeld */; };
+		4AF52F172BFC8FBE007DFD40 /* MatchMyPrefectureData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AF52F152BFC8FBE007DFD40 /* MatchMyPrefectureData.xcdatamodeld */; };
 		893F04E229A1CF493D9B3513 /* Pods_MatchMyPrefecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E792075DAB6B70D2E13D3E /* Pods_MatchMyPrefecture.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +55,7 @@
 		4AA606342BF099B4004B2C31 /* ResultData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultData.swift; sourceTree = "<group>"; };
 		4AA606362BF09B4C004B2C31 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		4AA6063A2BF0A4F2004B2C31 /* PrefectureBriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefectureBriefView.swift; sourceTree = "<group>"; };
-		4AF52F102BFC8BF9007DFD40 /* MatchMyPrefecture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatchMyPrefecture.xcdatamodel; sourceTree = "<group>"; };
+		4AF52F162BFC8FBE007DFD40 /* MatchMyPrefectureData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MatchMyPrefectureData.xcdatamodel; sourceTree = "<group>"; };
 		7F4A55DE5F9DDDA5AECC4F58 /* Pods-MatchMyPrefecture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchMyPrefecture.debug.xcconfig"; path = "Target Support Files/Pods-MatchMyPrefecture/Pods-MatchMyPrefecture.debug.xcconfig"; sourceTree = "<group>"; };
 		D47D438DE72B66A55028F28F /* Pods-MatchMyPrefecture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchMyPrefecture.release.xcconfig"; path = "Target Support Files/Pods-MatchMyPrefecture/Pods-MatchMyPrefecture.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				4A742AF72BF1080700DB67BF /* Info.plist */,
-				4AF52F0F2BFC8BF9007DFD40 /* MatchMyPrefecture.xcdatamodeld */,
+				4AF52F152BFC8FBE007DFD40 /* MatchMyPrefectureData.xcdatamodeld */,
 				4A98D96B2BF07DB800C46D94 /* MatchMyPrefectureApp.swift */,
 				4A1DB2392BF0B4B800396724 /* Persistent.swift */,
 				4AA6063F2BF0AB33004B2C31 /* Start */,
@@ -293,7 +293,6 @@
 			files = (
 				4A742AF62BF1059F00DB67BF /* SEPlayerManager.swift in Sources */,
 				4A1DB23A2BF0B4B800396724 /* Persistent.swift in Sources */,
-				4AF52F112BFC8BF9007DFD40 /* MatchMyPrefecture.xcdatamodeld in Sources */,
 				4AA606332BF093E4004B2C31 /* PrefectureMatchingController.swift in Sources */,
 				4AA52F7B2BF31A280013915B /* MainFortuneView.swift in Sources */,
 				4AA6062A2BF0898D004B2C31 /* ButtonUIView.swift in Sources */,
@@ -310,6 +309,7 @@
 				4A742AF22BF100F000DB67BF /* BGMPlayerManager.swift in Sources */,
 				4A98D96C2BF07DB800C46D94 /* MatchMyPrefectureApp.swift in Sources */,
 				4AA6062E2BF08DC1004B2C31 /* BirthdaySheet.swift in Sources */,
+				4AF52F172BFC8FBE007DFD40 /* MatchMyPrefectureData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,14 +539,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4AF52F0F2BFC8BF9007DFD40 /* MatchMyPrefecture.xcdatamodeld */ = {
+		4AF52F152BFC8FBE007DFD40 /* MatchMyPrefectureData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4AF52F102BFC8BF9007DFD40 /* MatchMyPrefecture.xcdatamodel */,
+				4AF52F162BFC8FBE007DFD40 /* MatchMyPrefectureData.xcdatamodel */,
 			);
-			currentVersion = 4AF52F102BFC8BF9007DFD40 /* MatchMyPrefecture.xcdatamodel */;
-			name = MatchMyPrefecture.xcdatamodeld;
-			path = /Users/asanogenki/Desktop/Apps/MatchMyPrefecture/MatchMyPrefecture/MatchMyPrefecture.xcdatamodeld;
+			currentVersion = 4AF52F162BFC8FBE007DFD40 /* MatchMyPrefectureData.xcdatamodel */;
+			name = MatchMyPrefectureData.xcdatamodeld;
+			path = /Users/asanogenki/Desktop/Apps/MatchMyPrefecture/MatchMyPrefecture/MatchMyPrefectureData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
